@@ -45,8 +45,8 @@ Access the frontend application in your browser at `http://localhost:4200`.
 
 Here is an overview of the e-commerce website responsibilities:
 
-![E-commerce Website Responsibilities](<img width="2145" alt="Untitled" src="https://github.com/khalilfarouqi/OrderWise-Front/assets/85711688/4f0608a8-2658-473c-95a5-f6938390a0a9">
-)
+<img width="2145" alt="Untitled" src="https://github.com/khalilfarouqi/OrderWise-Front/assets/85711688/02bed97f-a0a1-43e8-bdee-c19268942a67">
+
 
 ## License
 
