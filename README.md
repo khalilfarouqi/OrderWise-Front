@@ -1,27 +1,58 @@
-# OrderWiseFront
+# Order Management System for E-commerce Businesses - Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.0.
+## About This Project
 
-## Development server
+The frontend of the Order Management System is designed to provide a seamless user interface for managing orders, tracking deliveries, and handling product inventory for e-commerce businesses.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Technologies Used
 
-## Code scaffolding
+- **Angular:** Leveraging Angular framework for building dynamic and responsive web applications.
+- **TypeScript:** Utilizing TypeScript for enhanced development with static typing.
+- **HTML & CSS:** Structuring and styling the user interface for better user experience.
+- **RxJS:** Employing reactive programming for managing asynchronous data streams.
+- **Angular Material:** Using Angular Material for UI components to enhance design consistency and responsiveness.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Getting Started
 
-## Build
+### Prerequisites
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Node.js and npm (Node Package Manager)
+- Angular CLI
 
-## Running unit tests
+### Installation
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Clone the repository: `git clone https://github.com/your-username/OrderWise-Frontend.git`
+2. Navigate to the project directory: `cd OrderWise-Frontend`
+3. Install the necessary dependencies: `npm install`
+4. Configure the backend API URL in the environment settings
+5. Run the application: `ng serve`
 
-## Running end-to-end tests
+Access the frontend application in your browser at `http://localhost:4200`.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Configuration
 
-## Further help
+- Update the `environment.ts` file with the correct backend API URL to ensure proper communication between the frontend and backend services.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Features
+
+- **Order Management:** Create, update, delete, and view orders.
+- **Delivery Tracking:** Monitor the status of deliveries in real-time.
+- **Product Management:** Manage the inventory of products available for sale.
+- **User Authentication:** Secure login and registration for different user roles (Seller, Delivery Boy, Confirmation).
+- **Notifications:** Receive updates and notifications regarding order status.
+
+## Flowchart
+
+Here is an overview of the e-commerce website responsibilities:
+
+<img width="2145" alt="Untitled" src="https://github.com/khalilfarouqi/OrderWise-Front/assets/85711688/02bed97f-a0a1-43e8-bdee-c19268942a67">
+
+
+## License
+
+This project is licensed under the [MIT License]([LICENSE](https://github.com/khalilfarouqi/OrderWise-Front/blob/master/LICENSE)).
+
+## Acknowledgements
+
+Special thanks to the Angular community for providing excellent documentation and resources for building robust frontend applications.
+
