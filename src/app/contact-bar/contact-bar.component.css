@@ -1,0 +1,32 @@
+.top-bar {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .top-bar .contact-info {
+    display: flex;
+    gap: 1rem;
+    margin-left: 25px;
+  }
+
+  .top-bar .social-icons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .top-bar a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .top-bar a:hover {
+    text-decoration: underline;
+  }
+
+  .top-bar .social-icons a {
+    font-size: 1.5rem;
+    margin-right: 12px;
+  }
