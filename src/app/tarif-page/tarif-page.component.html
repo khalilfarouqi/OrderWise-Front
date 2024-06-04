@@ -1,0 +1,26 @@
+<app-contact-bar></app-contact-bar>
+<app-nav-bar-home></app-nav-bar-home>
+<h2>Destinations</h2>
+
+<div>
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search by Ville" (input)="filterData()">
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">City</th>
+        <th scope="col">Shipping Cost</th>
+        <th scope="col">Delivery Days</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let destination of filteredDestinations | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+        <td>{{ destination.city }}</td>
+        <td>{{ destination.shippingCost }}</td>
+        <td>{{ destination.deliveryDays }}</td>
+      </tr>
+    </tbody>
+</table>
+  
+<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+<app-footer></app-footer>
