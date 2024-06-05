@@ -3,3 +3,96 @@
     margin: 0 auto;
     padding: 20px;
   }
+  .hero-section {
+    background-image: linear-gradient(to bottom, #f7f7f7, #fff);
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .hero-section h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .hero-section img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 20px auto;
+  }
+  
+  .features-section {
+    padding: 40px;
+    background-color: #f9f9f9;
+  }
+  
+  .features-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .features-section li {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  .features-section i {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+  .features-section h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .auth-section {
+    padding: 40px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .auth-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .auth-section button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .auth-section.btn-signup {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+  
+  .auth-section.btn-login {
+    background-color: #337ab7;
+    color: #fff;
+  }
+  
+  .call-to-action {
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .call-to-action button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: #fff;
+  }
