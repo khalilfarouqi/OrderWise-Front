@@ -15,4 +15,12 @@ export class ApiConfigService {
   getDestinationsUrl(): string {
     return `${this.baseUrl}/destinations`;
   }
+
+  getContactUsUrl(): string {
+    return `${this.baseUrl}/contactus`;
+  }
+
+  getUserUrl(): string {
+    return `${this.baseUrl}/user`;
+  }
 }
