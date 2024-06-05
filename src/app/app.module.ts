@@ -15,7 +15,7 @@ import { ServicePageComponent } from './service-page/service-page.component';
 import { ContactUsPageComponent } from './contact-us-page/contact-us-page.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -35,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     SignUpComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     NgbModule,
     AppRoutingModule,
