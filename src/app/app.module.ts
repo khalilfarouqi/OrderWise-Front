@@ -23,6 +23,12 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { StockListComponent } from './stock-list/stock-list.component';
 import { NotificationListComponent } from './notification-list/notification-list.component';
+import { RouterModule } from '@angular/router';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { SettingComponent } from './setting/setting.component';
+import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +48,10 @@ import { NotificationListComponent } from './notification-list/notification-list
     OrderListComponent,
     ProductListComponent,
     StockListComponent,
-    NotificationListComponent
+    NotificationListComponent,
+    AnalyticsComponent,
+    SettingComponent,
+    ProfilComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -51,10 +60,13 @@ import { NotificationListComponent } from './notification-list/notification-list
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    RouterModule,
+    BrowserAnimationsModule,
     NgxPaginationModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

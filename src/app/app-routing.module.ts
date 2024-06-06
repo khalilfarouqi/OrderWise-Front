@@ -11,6 +11,9 @@ import { NotificationListComponent } from './notification-list/notification-list
 import { OrderListComponent } from './order-list/order-list.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { StockListComponent } from './stock-list/stock-list.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { SettingComponent } from './setting/setting.component';
+import { ProfilComponent } from './profil/profil.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent},
@@ -23,7 +26,10 @@ const routes: Routes = [
   { path: "notification", component: NotificationListComponent},
   { path: "order", component: OrderListComponent},
   { path: "product", component: ProductListComponent},
-  { path: "stock", component: StockListComponent}
+  { path: "stock", component: StockListComponent},
+  { path: "analytics", component: AnalyticsComponent},
+  { path: "setting", component: SettingComponent},
+  { path: "profil", component: ProfilComponent}
 ];
 
 @NgModule({
