@@ -1,6 +1,6 @@
 <div class="sidebar" #sidebar>
     <div class="logo-details">
-      <i class='fas fa-truck'></i>
+      <i class='bx bx-cycling'></i>
       <div class="logo_name">OrderWase</div>
       <i class='bx bx-menu' #btn></i>
     </div>
@@ -18,49 +18,42 @@
         <span class="tooltip">Dashboard</span>
       </li>
       <li>
-        <a href="">
-          <i class='bx bx-user' ></i>
-          <span class="links_name">User</span>
-        </a>
-        <span class="tooltip">User</span>
-      </li>
-      <li>
-        <a href="">
-          <i class='bx bx-chat' ></i>
-          <span class="links_name">Messages</span>
-        </a>
-        <span class="tooltip">Messages</span>
-      </li>
-      <li>
-        <a href="">
-          <i class='bx bx-pie-chart-alt-2' ></i>
-          <span class="links_name">Analytics</span>
-        </a>
-        <span class="tooltip">Analytics</span>
-      </li>
-      <li>
-        <a href="">
-          <i class='bx bx-folder' ></i>
-          <span class="links_name">File Manager</span>
-        </a>
-        <span class="tooltip">Files</span>
-      </li>
-      <li>
-        <a href="">
+        <a href="order">
           <i class='bx bx-cart-alt' ></i>
           <span class="links_name">Order</span>
         </a>
         <span class="tooltip">Order</span>
       </li>
       <li>
-        <a href="">
-          <i class='bx bx-heart' ></i>
-          <span class="links_name">Saved</span>
+        <a href="product">
+          <i class='bx bx-package' ></i>
+          <span class="links_name">Product</span>
         </a>
-        <span class="tooltip">Saved</span>
+        <span class="tooltip">Product</span>
       </li>
       <li>
-        <a href="">
+        <a href="stock">
+          <i class='bx bx-box' ></i>
+          <span class="links_name">Stock</span>
+        </a>
+        <span class="tooltip">Stock</span>
+      </li>
+      <li>
+        <a href="notification">
+          <i class='bx bx-bell' ></i>
+          <span class="links_name">Notification</span>
+        </a>
+        <span class="tooltip">Notification</span>
+      </li>
+      <li>
+        <a href="analytics">
+          <i class='bx bx-pie-chart-alt-2' ></i>
+          <span class="links_name">Analytics</span>
+        </a>
+        <span class="tooltip">Analytics</span>
+      </li>
+      <li>
+        <a href="setting">
           <i class='bx bx-cog' ></i>
           <span class="links_name">Setting</span>
         </a>
@@ -68,8 +61,8 @@
       </li>
       <li class="profile">
         <div class="profile-details">
-          <img src="profile.jpg" alt="profileImg">
-          <div class="name_job">
+          <img src="profile.jpg" alt="profileImg" routerLink="/profil">
+          <div class="name_job" routerLink="/profil">
             <div class="name">Prem Shahi</div>
             <div class="job">Web designer</div>
           </div>
