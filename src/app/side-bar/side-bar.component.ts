@@ -26,7 +26,9 @@ export class SideBarComponent implements AfterViewInit {
   toggleSidebar(): void {
     if (this.sidebar.nativeElement.classList.contains('open')) {
       this.renderer.removeClass(this.sidebar.nativeElement, 'open');
+      this.renderer.addClass(this.sidebar.nativeElement, 'closed');
     } else {
+      this.renderer.removeClass(this.sidebar.nativeElement, 'closed');
       this.renderer.addClass(this.sidebar.nativeElement, 'open');
     }
     this.menuBtnChange();
