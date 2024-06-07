@@ -31,4 +31,12 @@ export class ApiConfigService {
   getProductUrl(): string {
     return `${this.baseUrl}/product`;
   }
+
+  getStockUrl(): string {
+    return `${this.baseUrl}/stock`;
+  }
+
+  getNotificationUrl(): string {
+    return `${this.baseUrl}/notification`;
+  }
 }
