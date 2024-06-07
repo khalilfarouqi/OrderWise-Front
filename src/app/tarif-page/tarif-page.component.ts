@@ -16,8 +16,7 @@ export class TarifPageComponent implements OnInit {
   pageSize: number = 10;
   currentPage: number = 1;
 
-  constructor(private destinationsService: DestinationsService) {
-  }
+  constructor(private destinationsService: DestinationsService) { }
 
   ngOnInit(): void {
     this.getDestinations();
