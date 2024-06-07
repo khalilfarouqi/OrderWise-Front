@@ -30,6 +30,13 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import { SettingComponent } from './setting/setting.component';
 import { ProfilComponent } from './profil/profil.component';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +69,12 @@ import { ProfilComponent } from './profil/profil.component';
     HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatTableModule,
+    MatTabsModule
   ],
   providers: [
     provideClientHydration(),
