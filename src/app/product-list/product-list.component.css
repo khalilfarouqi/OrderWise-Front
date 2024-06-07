@@ -1,0 +1,17 @@
+
+  
+  .main-content {
+    margin-left: 78px;
+    transition: margin-left 0.5s;
+    padding: 16px;
+  }
+  
+  .main-content-open {
+    margin-left: 250px;
+  }
+  
+  .order-content {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
