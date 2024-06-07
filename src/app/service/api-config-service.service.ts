@@ -23,4 +23,12 @@ export class ApiConfigService {
   getUserUrl(): string {
     return `${this.baseUrl}/user`;
   }
+
+  getOrderUrl(): string {
+    return `${this.baseUrl}/order`;
+  }
+
+  getProductUrl(): string {
+    return `${this.baseUrl}/product`;
+  }
 }
