@@ -1,3 +1,32 @@
-<app-side-bar></app-side-bar>
+<app-side-bar (sidebarToggled)="onSidebarToggled($event)"></app-side-bar>
 <app-nav-bar></app-nav-bar>
-<p>stock-list works!</p>
+<div class="main-content" [class.main-content-open]="isSidebarOpen">
+  <div class="order-content">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product Nom</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+            <th scope="col">Selling price</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Addition date</th>
+            <th scope="col">Last modified date</th>
+            <th scope="col">Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stock of stocks">
+            <td>{{stock.product.productNom}}</td>
+            <td>{{stock.product.description}}</td>
+            <td>{{stock.product.sellingPrice}}</td>
+            <td>{{stock.product.weight}}</td>
+            <td>{{stock.quantity}}</td>
+            <td>{{stock.additionDate}}</td>
+            <td>{{stock.lastModifiedDate}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
