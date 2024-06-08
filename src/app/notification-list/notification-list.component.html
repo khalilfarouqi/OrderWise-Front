@@ -1,3 +1,22 @@
-<app-side-bar></app-side-bar>
+<app-side-bar (sidebarToggled)="onSidebarToggled($event)"></app-side-bar>
 <app-nav-bar></app-nav-bar>
-<p>notification-list works!</p>
+<div class="main-content notifications-container" [class.main-content-open]="isSidebarOpen">
+    <h1>All Notifications</h1>
+    <div *ngIf="notifications.length; else noNotifications">
+        <div *ngFor="let notification of notifications; let i = index" class="notification-item">
+        <button class="close-btn" (click)="removeNotification(i)">&times;</button>
+        <div class="notification-header">
+            <span class="notification-badge">{{ notification.badge }}</span>
+            <span class="timestamp">{{ notification.timestamp | date:'dd MMM yyyy at h:mm a' }}</span>
+        </div>
+        <div class="notification-body">
+            <h3>{{ notification.title }}</h3>
+            <p>{{ notification.message }}</p>
+            <p class="notification-user">{{ notification.user }}</p>
+        </div>
+        </div>
+    </div>
+    <ng-template #noNotifications>
+        <p>No notifications available.</p>
+    </ng-template>
+</div>
