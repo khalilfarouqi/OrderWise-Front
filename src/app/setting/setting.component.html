@@ -15,25 +15,28 @@
                         <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account" role="tab">
                             Account
                         </a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#wallet" role="tab">
+                            Wallet
+                        </a>
                         <a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
                             Password
                         </a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#privacy" role="tab">
                             Privacy and safety
                         </a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#email" role="tab">
                             Email notifications
                         </a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#web" role="tab">
                             Web notifications
                         </a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#widgets" role="tab">
                             Widgets
                         </a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#data" role="tab">
                             Your data
                         </a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#delete" role="tab" style="background-color: red; color: white;">
                             Delete account
                         </a>
                     </div>
@@ -186,6 +189,211 @@
                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                 </form>
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="privacy" role="tabpanel">
+                        <!-- Content for Privacy and safety -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Privacy and Safety</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Adjust your privacy settings to control who can see your activity and personal information.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="privacySettings">Privacy Settings</label>
+                                        <select class="form-control" id="privacySettings">
+                                            <option>Public</option>
+                                            <option>Friends Only</option>
+                                            <option>Private</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="email" role="tabpanel">
+                        <!-- Content for Email notifications -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Email Notifications</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Manage your email notification preferences.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label>Email me when:</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="emailUpdates">
+                                            <label class="form-check-label" for="emailUpdates">
+                                                There are updates to my account
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="emailMessages">
+                                            <label class="form-check-label" for="emailMessages">
+                                                I receive new messages
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="emailActivity">
+                                            <label class="form-check-label" for="emailActivity">
+                                                There is activity on my profile
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="web" role="tabpanel">
+                        <!-- Content for Web notifications -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Web Notifications</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Configure how you receive notifications on the web.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label>Notify me about:</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="webUpdates">
+                                            <label class="form-check-label" for="webUpdates">
+                                                Updates to my account
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="webMessages">
+                                            <label class="form-check-label" for="webMessages">
+                                                New messages
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="webActivity">
+                                            <label class="form-check-label" for="webActivity">
+                                                Activity on my profile
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="widgets" role="tabpanel">
+                        <!-- Content for Widgets -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Widgets</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Customize the widgets displayed on your dashboard.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label>Select Widgets:</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="widgetWeather">
+                                            <label class="form-check-label" for="widgetWeather">
+                                                Weather
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="widgetNews">
+                                            <label class="form-check-label" for="widgetNews">
+                                                News
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="widgetStocks">
+                                            <label class="form-check-label" for="widgetStocks">
+                                                Stocks
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="data" role="tabpanel">
+                        <!-- Content for Your data -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Your Data</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Manage your data and privacy settings.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="dataDownload">Download your data:</label>
+                                        <button class="btn btn-secondary" id="dataDownload">Download</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dataRequest">Request data deletion:</label>
+                                        <button class="btn btn-danger" id="dataRequest">Request Deletion</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="delete" role="tabpanel">
+                        <!-- Content for Delete account -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Delete Account</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Warning: Deleting your account is permanent and cannot be undone.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="deletePassword">Enter your password to confirm:</label>
+                                        <input type="password" class="form-control" id="deletePassword">
+                                    </div>
+                                    <button type="submit" class="btn btn-danger">Delete my account</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="wallet" role="tabpanel">
+                        <!-- Content for wallet -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Wallet</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Manage your wallet and payment methods.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="walletBalance">Current Balance</label>
+                                        <input type="text" class="form-control" id="walletBalance" value="$500.00" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addFunds">Add Funds</label>
+                                        <input type="number" class="form-control" id="addFunds" placeholder="Enter amount">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Add Funds</button>
+                                </form>
+                                <hr>
+                                <h5>Payment Methods</h5>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="cardNumber">Card Number</label>
+                                        <input type="text" class="form-control" id="cardNumber" placeholder="Enter card number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="expiryDate">Expiry Date</label>
+                                        <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cvv">CVV</label>
+                                        <input type="text" class="form-control" id="cvv" placeholder="CVV">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Add Payment Method</button>
+                                </form>
                             </div>
                         </div>
                     </div>
