@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-profil',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './profil.component.css'
 })
 export class ProfilComponent {
+  prodile: any[] = [];
+  isSidebarOpen = true;
+
+  constructor(private userService: UserService) { }
+
+  onSidebarToggled(isOpen: boolean) {
+    this.isSidebarOpen = isOpen;
+  }
 
 }
