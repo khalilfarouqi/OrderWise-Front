@@ -36,7 +36,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 
-
 @NgModule({
   declarations: [
     AppComponent,
