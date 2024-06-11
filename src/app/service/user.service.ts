@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ApiConfigService } from './api-config-service.service';
 import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,12 @@ export class UserService {
     this.apiUrl = this.apiConfig.getUserUrl();
   }
 
-  getFUrl(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getFUrl(): Observable<User> {
+    return this.http.get<User>(this.apiUrl);
   }
 
-  getProfile(username: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/profile/${username}`);
+  getProfile(username: string): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/profile/${username}`);
   }
 
   postUserForm(userForm: FormGroup): Observable<any> {
