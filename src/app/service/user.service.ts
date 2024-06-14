@@ -26,4 +26,8 @@ export class UserService {
   postUserForm(userForm: FormGroup): Observable<any> {
     return this.http.post(this.apiUrl, userForm);
   }
+
+  updateUserForm(userForm: FormGroup): Observable<any> {
+    return this.http.put(this.apiUrl, userForm);
+  }
 }
