@@ -5,7 +5,7 @@ import { User } from '../models/User';
 import { Gender } from '../enum/gender.enum';
 import { Role } from '../enum/role.enum';
 import { UserType } from '../enum/userType.enum';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-setting',
@@ -16,6 +16,13 @@ export class SettingComponent implements OnInit {
 
   userForm!: FormGroup;
   userInfoForm!: FormGroup;
+  passwordForm!: FormGroup;
+
+  isMuch!: boolean;
+
+  message: string | undefined;
+  error: string | undefined;
+
   profile: User = {
     username: '',
     id: 0,
@@ -42,7 +49,9 @@ export class SettingComponent implements OnInit {
     this.genderEntries = Object.entries(Gender).map(([key, value]) => ({ key, value }));
   }
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private fb: FormBuilder) { 
+
+  }
 
   ngOnInit(): void {
     this.getProfile('khalil.farouqi');
@@ -59,11 +68,20 @@ export class SettingComponent implements OnInit {
       tel: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required)
     });
+    this.passwordForm = this.fb.group({
+      oldPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmNewPassword: ['', [Validators.required]]
+    }, { validator: this.passwordMatchValidator });
     this.initializeEnum();
   }
 
   onSidebarToggled(isOpen: boolean) {
     this.isSidebarOpen = isOpen;
+  }
+
+  passwordMatchValidator(form: FormGroup) {
+    return form.get('newPassword')!.value === form.get('confirmNewPassword')!.value ? true : { mismatch: false };
   }
 
   getProfile(username: string) {
@@ -99,6 +117,25 @@ export class SettingComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error  ==>  ', error);
+      }
+    });
+  }
+
+  submitPasswordForm(): void {
+    console.log('Form submitted:', this.passwordForm.value);
+    this.passwordForm.value.username = 'khalil.farouqi';
+    this.userService.updatePassword(this.passwordForm.value).subscribe({
+      next: (response) => {
+        console.log("response  --->  " + response);
+
+        this.message = 'Password changed successfully!';
+        this.error = undefined;
+
+        this.passwordForm.reset();
+      },
+      error: (error) => {
+        this.error = 'Failed to change password. Please try again.';
+        this.message = undefined;
       }
     });
   }

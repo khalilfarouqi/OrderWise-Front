@@ -30,4 +30,8 @@ export class UserService {
   updateUserForm(userForm: FormGroup): Observable<any> {
     return this.http.put(this.apiUrl, userForm);
   }
+
+  updatePassword(userForm: FormGroup): Observable<any> {
+    return this.http.post(this.apiUrl + '/change-password', userForm);
+  }
 }
