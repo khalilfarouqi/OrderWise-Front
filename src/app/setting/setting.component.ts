@@ -15,6 +15,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class SettingComponent implements OnInit {
 
   userForm!: FormGroup;
+  userInfoForm!: FormGroup;
   profile: User = {
     username: '',
     id: 0,
@@ -33,7 +34,13 @@ export class SettingComponent implements OnInit {
   };
 
   isSidebarOpen = true;
-  cities = Object.values(City);
+  cityEntries: { key: string, value: string }[] = [];
+  genderEntries: { key: string, value: string }[] = [];
+
+  initializeEnum() {
+    this.cityEntries = Object.entries(City).map(([key, value]) => ({ key, value }));
+    this.genderEntries = Object.entries(Gender).map(([key, value]) => ({ key, value }));
+  }
 
   constructor(private userService: UserService) { }
 
@@ -43,6 +50,16 @@ export class SettingComponent implements OnInit {
       username: new FormControl('', Validators.required),
       image: new FormControl('', Validators.required)
     });
+    this.userInfoForm = new FormGroup({
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      cin: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      tel: new FormControl('', Validators.required),
+      gender: new FormControl('', Validators.required)
+    });
+    this.initializeEnum();
   }
 
   onSidebarToggled(isOpen: boolean) {
@@ -60,12 +77,25 @@ export class SettingComponent implements OnInit {
     );
   }
 
-  submitForm(): void {
+  submitUserForm(): void {
     console.log('Form submitted:', this.userForm.value);
     this.userService.updateUserForm(this.userForm.value).subscribe({
       next: (response) => {
         console.log("response  --->  " + response)
-        this.userForm.reset();
+      },
+      error: (error) => {
+        console.error('Error  ==>  ', error);
+      }
+    });
+  }
+
+  submitUserInfoForm(): void {
+    console.log('Form submitted:', this.userInfoForm.value);
+    this.userInfoForm.value.username = 'khalil.farouqi';
+    this.userService.updateUserForm(this.userInfoForm.value).subscribe({
+      next: (response) => {
+        console.log("response  --->  " + response)
+        this.userInfoForm.reset();
       },
       error: (error) => {
         console.error('Error  ==>  ', error);
