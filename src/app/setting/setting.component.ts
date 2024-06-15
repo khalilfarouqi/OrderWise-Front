@@ -5,7 +5,7 @@ import { User } from '../models/User';
 import { Gender } from '../enum/gender.enum';
 import { Role } from '../enum/role.enum';
 import { UserType } from '../enum/userType.enum';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-setting',
@@ -17,8 +17,6 @@ export class SettingComponent implements OnInit {
   userForm!: FormGroup;
   userInfoForm!: FormGroup;
   passwordForm!: FormGroup;
-
-  isMuch!: boolean;
 
   message: string | undefined;
   error: string | undefined;
@@ -72,16 +70,18 @@ export class SettingComponent implements OnInit {
       oldPassword: ['', [Validators.required]],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmNewPassword: ['', [Validators.required]]
-    }, { validator: this.passwordMatchValidator });
+    }, { validators: this.passwordMatchValidator });
     this.initializeEnum();
   }
 
   onSidebarToggled(isOpen: boolean) {
     this.isSidebarOpen = isOpen;
   }
-
-  passwordMatchValidator(form: FormGroup) {
-    return form.get('newPassword')!.value === form.get('confirmNewPassword')!.value ? true : { mismatch: false };
+  
+  passwordMatchValidator(control: AbstractControl) {
+    const password = control.get('newPassword')!.value;
+    const confirmPassword = control.get('confirmNewPassword')!.value;
+    return password === confirmPassword ? null : { mismatch: true };
   }
 
   getProfile(username: string) {
