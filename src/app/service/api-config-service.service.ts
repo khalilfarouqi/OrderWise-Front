@@ -43,4 +43,8 @@ export class ApiConfigService {
   getWalletUrl(): string {
     return `${this.baseUrl}/wallet`;
   }
+
+  getMyMoneyUrl(): string {
+    return `${this.baseUrl}/mymoney`;
+  }
 }
