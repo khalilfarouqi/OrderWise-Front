@@ -6,6 +6,8 @@ import { Gender } from '../enum/gender.enum';
 import { Role } from '../enum/role.enum';
 import { UserType } from '../enum/userType.enum';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { WalletService } from '../service/wallet.service';
+import { Wallet } from '../models/Wallet';
 
 @Component({
   selector: 'app-setting',
@@ -20,6 +22,8 @@ export class SettingComponent implements OnInit {
 
   message: string | undefined;
   error: string | undefined;
+
+  wallet: Wallet;
 
   profile: User = {
     username: '',
@@ -47,12 +51,39 @@ export class SettingComponent implements OnInit {
     this.genderEntries = Object.entries(Gender).map(([key, value]) => ({ key, value }));
   }
 
-  constructor(private userService: UserService, private fb: FormBuilder) { 
-
+  constructor(
+    private userService: UserService, 
+    private fb: FormBuilder,
+    private walletService: WalletService) { 
+      const defaultUser: User = {
+        id: 0, 
+        username: '', 
+        email: '',
+        lastCheckIn: '',
+        firstname: '',
+        lastname: '',
+        password: '',
+        cin: '',
+        tel: '',
+        image: '',
+        city: City.AGOURI_MEKNES,
+        gender: Gender.MALE,
+        role: Role.ADMIN,
+        userType: UserType.ADMIN
+      };
+      this.wallet = {
+        id: 0,
+        sold: 0,
+        amountCredited: 0,
+        amountDeposited: 0,
+        user: defaultUser,
+        seller: defaultUser
+      };
   }
 
   ngOnInit(): void {
     this.getProfile('khalil.farouqi');
+    this.getWallatByUsername('khalil.farouqi');
     this.userForm = new FormGroup({
       username: new FormControl('', Validators.required),
       image: new FormControl('', Validators.required)
@@ -138,6 +169,18 @@ export class SettingComponent implements OnInit {
         this.message = undefined;
       }
     });
+  }
+
+  getWallatByUsername(username: string) {
+    this.walletService.getWallatByUsername(username).subscribe(
+      (data) => {
+        this.wallet = data;
+        console.log(this.wallet);
+      },
+      (error) => {
+        console.error('Error fetching wallet : ', error);
+      }
+    );
   }
 
 }

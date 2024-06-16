@@ -343,14 +343,22 @@
                                 <p>Manage your wallet and payment methods.</p>
                                 <form>
                                     <div class="form-group">
-                                        <label for="walletBalance">Current Balance</label>
-                                        <input type="text" class="form-control" id="walletBalance" value="$500.00" disabled>
+                                        <label for="sold">Votre Solde : </label>
+                                        <input type="text" class="form-control" id="sold" value="{{wallet.sold}} DH" disabled style="color: #4CAF50;">
                                     </div>
                                     <div class="form-group">
-                                        <label for="addFunds">Add Funds</label>
-                                        <input type="number" class="form-control" id="addFunds" placeholder="Enter amount">
+                                        <label for="amountCredited">Amount credited : </label>
+                                        <input type="text" class="form-control" id="amountCredited" value="{{wallet.amountCredited}} DH" disabled style="color: #2196F3;">
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Add Funds</button>
+                                    <div class="form-group">
+                                        <label for="amountDeposited">Amount deposited : </label>
+                                        <input type="text" class="form-control" id="amountDeposited" value="{{wallet.amountDeposited}} DH" disabled style="color: #F44336;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addFunds">Demande un montant</label>
+                                        <input type="number" class="form-control" id="addFunds" placeholder="Enter montant demander">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Envoyer la demande</button>
                                 </form>
                                 <hr>
                                 <h5>Payment Methods</h5>
