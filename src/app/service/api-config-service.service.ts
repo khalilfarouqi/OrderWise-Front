@@ -39,4 +39,8 @@ export class ApiConfigService {
   getNotificationUrl(): string {
     return `${this.baseUrl}/notification`;
   }
+
+  getWalletUrl(): string {
+    return `${this.baseUrl}/wallet`;
+  }
 }
