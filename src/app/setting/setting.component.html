@@ -341,7 +341,7 @@
                             </div>
                             <div class="card-body">
                                 <p>Manage your wallet and payment methods.</p>
-                                <form>
+                                <form [formGroup]="myMoneyForm" (ngSubmit)="submitMyMoneyForm()">
                                     <div class="form-group">
                                         <label for="sold">Votre Solde : </label>
                                         <input type="text" class="form-control" id="sold" value="{{wallet.sold}} DH" disabled style="color: #4CAF50;">
@@ -356,7 +356,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="addFunds">Demande un montant</label>
-                                        <input type="number" class="form-control" id="addFunds" placeholder="Enter montant demander">
+                                        <input type="number" class="form-control" id="addFunds" placeholder="Enter montant demander" formControlName="montant">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Envoyer la demande</button>
                                 </form>

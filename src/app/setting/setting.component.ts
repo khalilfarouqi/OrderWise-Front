@@ -8,6 +8,9 @@ import { UserType } from '../enum/userType.enum';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { WalletService } from '../service/wallet.service';
 import { Wallet } from '../models/Wallet';
+import { MyMoneyService } from '../service/my-money.service';
+import { MyMoney } from '../models/MyMoney';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-setting',
@@ -19,6 +22,7 @@ export class SettingComponent implements OnInit {
   userForm!: FormGroup;
   userInfoForm!: FormGroup;
   passwordForm!: FormGroup;
+  myMoneyForm!: FormGroup;
 
   message: string | undefined;
   error: string | undefined;
@@ -54,7 +58,8 @@ export class SettingComponent implements OnInit {
   constructor(
     private userService: UserService, 
     private fb: FormBuilder,
-    private walletService: WalletService) { 
+    private walletService: WalletService,
+    private myMoneyService: MyMoneyService) { 
       const defaultUser: User = {
         id: 0, 
         username: '', 
@@ -102,6 +107,10 @@ export class SettingComponent implements OnInit {
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmNewPassword: ['', [Validators.required]]
     }, { validators: this.passwordMatchValidator });
+    this.myMoneyForm = new FormGroup({
+      user: new FormControl('', Validators.required),
+      montant: new FormControl('', Validators.required)
+    });
     this.initializeEnum();
   }
 
@@ -133,6 +142,26 @@ export class SettingComponent implements OnInit {
         console.log("response  --->  " + response)
       },
       error: (error) => {
+        console.error('Error  ==>  ', error);
+      }
+    });
+  }
+
+  submitMyMoneyForm(): void {
+    const data: MyMoney = {
+      montant: this.myMoneyForm.value.montant,
+      user: {
+        username: 'khalil.farouqi'
+      }
+    };
+    console.log('Form submitted:', data);
+    this.myMoneyService.postMyMoney(data).subscribe({
+      next: (response) => {
+        console.log("response  --->  " + response)
+        this.myMoneyForm.reset();
+      },
+      error: (error) => {
+        this.showAlert('Vous avez un problem dans votre demande', error.error.message, 'error')
         console.error('Error  ==>  ', error);
       }
     });
@@ -183,4 +212,12 @@ export class SettingComponent implements OnInit {
     );
   }
 
+  showAlert(title: string, text: string, icon: any) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      confirmButtonText: 'OK'
+    });
+  }
 }
