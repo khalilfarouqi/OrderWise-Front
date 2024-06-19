@@ -1,12 +1,12 @@
 <app-side-bar (sidebarToggled)="onSidebarToggled($event)"></app-side-bar>
 <app-nav-bar></app-nav-bar>
 <div class="card-group main-content" [class.main-content-open]="isSidebarOpen">
-    <div class="card" *ngFor="let product of products">
-      <img class="card-img-top" src="..." alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{product.productNom}}</h5>
-        <p class="card-text">{{product.description}}</p>
-        <p class="card-text"><small class="text-muted">{{product.sellingPrice}}</small></p>
-      </div>
+  <div class="card" *ngFor="let product of products">
+    <img class="card-img-top product-image" [src]="product.photo.image1" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{product.productNom}}</h5>
+      <p class="card-text">{{product.description}}</p>
+      <p class="card-text"><small class="text-muted price">{{product.sellingPrice}} DH</small></p>
     </div>
   </div>
+</div>

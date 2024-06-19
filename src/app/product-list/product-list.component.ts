@@ -17,11 +17,11 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getProductsByUsernameUrl('khalil.farouqi');
   }
 
-  getProducts() {
-    this.productService.getProductUrl().subscribe(
+  getProductsByUsernameUrl(username: string) {
+    this.productService.getProductsByUsernameUrl(username).subscribe(
       (data) => {
         console.log(data);
         this.products = data;
