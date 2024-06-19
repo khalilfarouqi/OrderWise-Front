@@ -7,13 +7,13 @@
           <tr>
             <th scope="col">Product Nom</th>
             <th scope="col">Description</th>
-            <th scope="col">Status</th>
             <th scope="col">Selling price</th>
-            <th scope="col">Weight</th>
+            <th scope="col">Purchase price</th>
             <th scope="col">Quantity</th>
             <th scope="col">Addition date</th>
             <th scope="col">Last modified date</th>
-            <th scope="col">Total Price</th>
+            <th scope="col">Last sale date</th>
+            <th scope="col">Modifier</th>
           </tr>
         </thead>
         <tbody>
@@ -21,10 +21,14 @@
             <td>{{stock.product.productNom}}</td>
             <td>{{stock.product.description}}</td>
             <td>{{stock.product.sellingPrice}}</td>
-            <td>{{stock.product.weight}}</td>
+            <td>{{stock.product.purchasePrice}}</td>
             <td>{{stock.quantity}}</td>
-            <td>{{stock.additionDate}}</td>
-            <td>{{stock.lastModifiedDate}}</td>
+            <td>{{stock.additionDate | date: 'dd/MM/YY, hh:mm'}}</td>
+            <td>{{stock.lastModifiedDate | date: 'dd/MM/YY, hh:mm'}}</td>
+            <td>{{stock.lastSaleDate | date: 'dd/MM/YY, hh:mm'}}</td>
+            <td>
+              <input type="button" id="modif" value="Modifier">
+            </td>
           </tr>
         </tbody>
       </table>

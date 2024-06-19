@@ -17,13 +17,12 @@ export class StockListComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.getOrders();
+    this.getStocksByUsernameUrl('khalil.farouqi');
   }
 
-  getOrders() {
-    this.stockService.getStockUrl().subscribe(
+  getStocksByUsernameUrl(username: string) {
+    this.stockService.getStocksByUsernameUrl(username).subscribe(
       (data) => {
-        console.log(data);
         this.stocks = data;
       },
       (error) => {
