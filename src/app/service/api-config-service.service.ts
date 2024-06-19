@@ -28,6 +28,10 @@ export class ApiConfigService {
     return `${this.baseUrl}/order`;
   }
 
+  getOrderAssignmentUrl(): string {
+    return `${this.baseUrl}/order-assignment`;
+  }
+
   getProductUrl(): string {
     return `${this.baseUrl}/product`;
   }
