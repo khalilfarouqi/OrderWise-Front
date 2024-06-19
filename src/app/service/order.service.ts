@@ -20,6 +20,10 @@ export class OrderService {
     return this.http.get<any[]>(this.apiUrl + '/getAll');
   }
 
+  getOrderByUsernameUrl(username: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/seller/${username}`);
+  }
+
   getDashStateUrl(username: string): Observable<DashboardBean> {
     return this.http.get<DashboardBean>(`${this.apiUrl}/dashboard-state/${username}`);
   }

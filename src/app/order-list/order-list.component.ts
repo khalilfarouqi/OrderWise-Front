@@ -17,13 +17,12 @@ export class OrderListComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.getOrders();
+    this.getOrders('khalil.farouqi');
   }
 
-  getOrders() {
-    this.orderService.getOrderUrl().subscribe(
+  getOrders(username: string) {
+    this.orderService.getOrderByUsernameUrl(username).subscribe(
       (data) => {
-        console.log(data);
         this.orders = data;
       },
       (error) => {
