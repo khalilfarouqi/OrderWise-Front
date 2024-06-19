@@ -10,7 +10,7 @@
                             <i class="fas fa-sack-dollar"></i>
                         </div>
                         <p class="card-category">Total Sales</p>
-                        <h3 class="card-title">200 <small>DH</small></h3>
+                        <h3 class="card-title">{{ dashState.totalSales }} <small>DH</small></h3>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                                     <i class="material-icons">check_circle</i>
                                 </div>
                                 <p class="card-category">Order Treated This Month</p>
-                                <h3 class="card-title">100</h3>
+                                <h3 class="card-title">{{dashState.currentMonthOrderCount}}</h3>
                             </div>
                         </mat-tab>
                         <mat-tab label="Today">
@@ -32,7 +32,7 @@
                                     <i class="material-icons">today</i>
                                 </div>
                                 <p class="card-category">Order Treated Today</p>
-                                <h3 class="card-title">50</h3>
+                                <h3 class="card-title">{{dashState.currentDayOrderCount}}</h3>
                             </div>
                         </mat-tab>
                     </mat-tab-group>
@@ -45,7 +45,7 @@
                             <i class="material-icons">cancel</i>
                         </div>
                         <p class="card-category">Order Rejected in Confirmation</p>
-                        <h3 class="card-title">10</h3>
+                        <h3 class="card-title">{{dashState.ordersRejectedInConfirmation}}</h3>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                             <i class="material-icons">block</i>
                         </div>
                         <p class="card-category">Order Rejected in Delivery</p>
-                        <h3 class="card-title">5</h3>
+                        <h3 class="card-title">{{dashState.ordersRejectedInDelivery}}</h3>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                             <i class="material-icons">directions_bike</i>
                         </div>
                         <p class="card-category">Order in Progress</p>
-                        <h3 class="card-title">20</h3>
+                        <h3 class="card-title">{{dashState.ordersInProgress}}</h3>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                             <i class="material-icons">warning</i>
                         </div>
                         <p class="card-category">Order Not Treated</p>
-                        <h3 class="card-title">15</h3>
+                        <h3 class="card-title">{{dashState.ordersNotTreated}}</h3>
                     </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                             <i class="material-icons">reply</i>
                         </div>
                         <p class="card-category">Order Return</p>
-                        <h3 class="card-title">8</h3>
+                        <h3 class="card-title">{{dashState.ordersReturned}}</h3>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                             <i class="material-icons">check</i>
                         </div>
                         <p class="card-category">Order Valid</p>
-                        <h3 class="card-title">120</h3>
+                        <h3 class="card-title">{{dashState.ordersValidated}}</h3>
                     </div>
                 </div>
             </div>
@@ -111,12 +111,12 @@
                     <div class="card-body">
                         <h4 class="card-title">Commande a confirmée</h4>
                         <p class="card-category">
-                            100 commandes ne sont pas encore validées.
+                            {{dashState.ordersToConfirm}} commandes ne sont pas encore validées.
                         </p>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                            <i class="material-icons">access_time</i> updated {{ updatedTimeOrdersToConfirm }}
                         </div>
                     </div>
                 </div>
@@ -125,11 +125,11 @@
                 <div class="card card-chart">
                     <div class="card-body">
                         <h4 class="card-title">Commande a livrée</h4>
-                        <p class="card-category">100 commandes ont été validées mais ne sont pas encore livrées.</p>
+                        <p class="card-category">{{dashState.ordersToDeliver}} commandes ont été validées mais ne sont pas encore livrées.</p>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">access_time</i> campaign sent 2 days ago
+                            <i class="material-icons">access_time</i> updated {{ updatedTimeOrdersToDeliver }}
                         </div>
                     </div>
                 </div>
@@ -138,11 +138,11 @@
                 <div class="card card-chart">
                     <div class="card-body">
                         <h4 class="card-title">Commandes à retourner</h4>
-                        <p class="card-category">100 commandes doivent être renvoyées.</p>
+                        <p class="card-category">{{dashState.ordersToReturn}} commandes doivent être renvoyées.</p>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">access_time</i> campaign sent 2 days ago
+                            <i class="material-icons">access_time</i> updated {{ updatedTimeOrdersToReturn }}
                         </div>
                     </div>
                 </div>
@@ -191,19 +191,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                
-                                            </td>
-                                            <td>
-                                                Create 4 Invisible User Experiences you Never Knew About
-                                            </td>
-                                            <td>
-                                                Create 4 Invisible User Experiences you Never Knew About
-                                            </td>
-                                            <td>
-                                                
-                                            </td>
+                                        <tr *ngFor="let ordersConfirm of OrdersConfirms">
+                                            <td>{{ordersConfirm.trackingCode}}</td>
+                                            <td>{{ordersConfirm.orderDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                            <td>{{ordersConfirm.confirmationDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                            <td>{{ordersConfirm.totalPrice}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -219,19 +211,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                
-                                            </td>
-                                            <td>
-                                                Create 4 Invisible User Experiences you Never Knew About
-                                            </td>
-                                            <td>
-                                                Create 4 Invisible User Experiences you Never Knew About
-                                            </td>
-                                            <td>
-                                                
-                                            </td>
+                                        <tr *ngFor="let ordersDeliver of OrdersDelivers">
+                                            <td>{{ordersDeliver.trackingCode}}</td>
+                                            <td>{{ordersDeliver.orderDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                            <td>{{ordersDeliver.deliveryDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                            <td>{{ordersDeliver.totalPrice}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -247,19 +231,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                
-                                            </td>
-                                            <td>
-                                                Create 4 Invisible User Experiences you Never Knew About
-                                            </td>
-                                            <td>
-                                                Create 4 Invisible User Experiences you Never Knew About
-                                            </td>
-                                            <td>
-                                                
-                                            </td>
+                                        <tr *ngFor="let ordersReturn of OrdersReturns">
+                                            <td>{{ordersReturn.trackingCode}}</td>
+                                            <td>{{ordersReturn.orderDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                            <td>{{ordersReturn.returnDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                            <td>{{ordersReturn.totalPrice}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -278,20 +254,20 @@
                         <table class="table table-hover">
                             <thead class="text-warning">
                                 <tr>
-                                    <th>Code</th>
-                                    <th>Date</th>
-                                    <th>Étape</th>
-                                    <th>Statut</th>
-                                    <th>Prix</th>
+                                    <th scope="col">Code</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Étape</th>
+                                    <th scope="col">Statut</th>
+                                    <th scope="col">Prix</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>Stage</td>
-                                    <td>Niger</td>
-                                    <th>$36,738</th>
+                                <tr *ngFor="let orderAssignment of OrderAssignments">
+                                    <td>{{orderAssignment.order.trackingCode}}</td>
+                                    <td>{{orderAssignment.assignmentDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                    <td>{{orderAssignment.order.stage}}</td>
+                                    <td>{{orderAssignment.order.status}}</td>
+                                    <th>{{orderAssignment.order.totalPrice}} DH</th>
                                 </tr>
                             </tbody>
                         </table>
