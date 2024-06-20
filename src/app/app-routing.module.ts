@@ -14,6 +14,7 @@ import { StockListComponent } from './stock-list/stock-list.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { SettingComponent } from './setting/setting.component';
 import { ProfilComponent } from './profil/profil.component';
+import { ProductPageComponent } from './product-page/product-page.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent},
@@ -29,7 +30,8 @@ const routes: Routes = [
   { path: "stock", component: StockListComponent},
   { path: "analytics", component: AnalyticsComponent},
   { path: "setting", component: SettingComponent},
-  { path: "profil", component: ProfilComponent}
+  { path: "profil", component: ProfilComponent},
+  { path: "profil-page", component: ProductPageComponent}
 ];
 
 @NgModule({

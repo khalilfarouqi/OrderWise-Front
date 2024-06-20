@@ -35,6 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ProductPageComponent } from './product-page/product-page.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     NotificationListComponent,
     AnalyticsComponent,
     SettingComponent,
-    ProfilComponent
+    ProfilComponent,
+    ProductPageComponent
   ],
   imports: [
     ReactiveFormsModule,
