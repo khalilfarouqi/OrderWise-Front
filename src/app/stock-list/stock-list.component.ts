@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StockService } from '../service/stock.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stock-list',
@@ -10,7 +11,7 @@ export class StockListComponent implements OnInit {
   stocks: any[] = [];
   isSidebarOpen = true;
 
-  constructor(private stockService: StockService) { }
+  constructor(private stockService: StockService, private router: Router) { }
 
   onSidebarToggled(isOpen: boolean) {
     this.isSidebarOpen = isOpen;
@@ -29,6 +30,10 @@ export class StockListComponent implements OnInit {
         console.error('Error fetching stocks:', error);
       }
     );
+  }
+
+  viewProductDetails(productId: number): void {
+    this.router.navigate(['/product-page', productId]);
   }
 
 }

@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: "analytics", component: AnalyticsComponent},
   { path: "setting", component: SettingComponent},
   { path: "profil", component: ProfilComponent},
-  { path: "profil-page", component: ProductPageComponent}
+  { path: "product-page/:id", component: ProductPageComponent}
 ];
 
 @NgModule({

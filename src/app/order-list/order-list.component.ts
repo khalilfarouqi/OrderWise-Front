@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../service/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-list',
@@ -10,7 +11,7 @@ export class OrderListComponent implements OnInit {
   orders: any[] = [];
   isSidebarOpen = true;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private router: Router) { }
 
   onSidebarToggled(isOpen: boolean) {
     this.isSidebarOpen = isOpen;
@@ -29,6 +30,10 @@ export class OrderListComponent implements OnInit {
         console.error('Error fetching orders:', error);
       }
     );
+  }
+
+  viewProductDetails(productId: number): void {
+    this.router.navigate(['/product-page', productId]);
   }
 
 }

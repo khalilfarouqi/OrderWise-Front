@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../service/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -10,7 +11,7 @@ export class ProductListComponent implements OnInit {
   products: any[] = [];
   isSidebarOpen = true;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   onSidebarToggled(isOpen: boolean) {
     this.isSidebarOpen = isOpen;
@@ -30,6 +31,10 @@ export class ProductListComponent implements OnInit {
         console.error('Error fetching products:', error);
       }
     );
+  }
+
+  viewProductDetails(productId: number): void {
+    this.router.navigate(['/product-page', productId]);
   }
 
 }

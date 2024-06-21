@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../service/product.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-page',
@@ -11,10 +12,11 @@ export class ProductPageComponent implements OnInit {
   product: any;
   isSidebarOpen = true;
 
-  constructor(public productService: ProductService) {}
+  constructor(private route: ActivatedRoute, public productService: ProductService) {}
 
   ngOnInit(): void {
-    this.getProductsByIdUrl(1);
+    const productId = +this.route.snapshot.paramMap.get('id')!;
+    this.getProductsByIdUrl(productId);
   }
 
   onSidebarToggled(isOpen: boolean) {

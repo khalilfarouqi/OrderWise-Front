@@ -25,7 +25,7 @@
             <td>{{order.customer.completeNom}}</td>
             <td>{{order.customer.tel}}</td>
             <td>{{order.customer.city}}</td>
-            <td *ngFor="let item of order.cart.items">{{item.product.productNom}}</td>
+            <td *ngFor="let item of order.cart.items"><a href="/product-page/{{item.product.id}}" >{{item.product.productNom}}</a></td>
             <td *ngFor="let item of order.cart.items">{{item.product.sellingPrice}}</td>
             <td *ngFor="let item of order.cart.items">{{item.qty}}</td>
             <td>{{order.totalPrice}} DH</td>

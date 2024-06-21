@@ -18,7 +18,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let stock of stocks">
-            <td>{{stock.product.productNom}}</td>
+            <td><a href="/product-page/{{stock.product.id}}">{{stock.product.productNom}}</a></td>
             <td>{{stock.product.description}}</td>
             <td>{{stock.product.sellingPrice}}</td>
             <td>{{stock.product.purchasePrice}}</td>
