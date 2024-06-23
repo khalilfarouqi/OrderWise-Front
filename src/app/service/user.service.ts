@@ -34,4 +34,14 @@ export class UserService {
   updatePassword(userForm: FormGroup): Observable<any> {
     return this.http.post(this.apiUrl + '/change-password', userForm);
   }
+  
+  uploadImage(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+
+    return this.http.post(this.apiUrl, formData, {
+      reportProgress: true,
+      observe: 'events'
+    });
+  }
 }

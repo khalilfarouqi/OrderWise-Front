@@ -51,4 +51,8 @@ export class ApiConfigService {
   getMyMoneyUrl(): string {
     return `${this.baseUrl}/mymoney`;
   }
+
+  getUploadFileUrl(): string {
+    return `${this.baseUrl}/fileUploads`;
+  }
 }

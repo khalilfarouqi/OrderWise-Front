@@ -11,6 +11,8 @@ import { Wallet } from '../models/Wallet';
 import { MyMoneyService } from '../service/my-money.service';
 import { MyMoney } from '../models/MyMoney';
 import Swal from 'sweetalert2';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { UploadFileService } from '../service/upload-file.service';
 
 @Component({
   selector: 'app-setting',
@@ -24,9 +26,14 @@ export class SettingComponent implements OnInit {
   passwordForm!: FormGroup;
   myMoneyForm!: FormGroup;
 
+  profileImage: string | undefined;
+  selectedFile: File | null = null;
+
   message: string | undefined;
   error: string | undefined;
 
+  selectedImage!: string;
+  
   wallet: Wallet;
 
   profile: User = {
@@ -59,7 +66,9 @@ export class SettingComponent implements OnInit {
     private userService: UserService, 
     private fb: FormBuilder,
     private walletService: WalletService,
-    private myMoneyService: MyMoneyService) { 
+    private myMoneyService: MyMoneyService,
+    private uploadFileService: UploadFileService,
+    private http: HttpClient) { 
       const defaultUser: User = {
         id: 0, 
         username: '', 
@@ -128,6 +137,7 @@ export class SettingComponent implements OnInit {
     this.userService.getProfile(username).subscribe(
       (data) => {
         this.profile = data;
+        this.profileImage = 'assets/' + this.profile.image;
       },
       (error) => {
         console.error('Error fetching profile : ', error);
@@ -135,7 +145,34 @@ export class SettingComponent implements OnInit {
     );
   }
 
+  selectImage(image: string): void {
+    this.selectedImage = image;
+    console.log("uploaded image : " + this.selectedImage);
+  }
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+    
+    if (this.selectedFile) {
+      this.uploadFileService.uploadProfileImage(this.selectedFile).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          console.log('Upload Progress: ' + Math.round(event.loaded / event.total! * 100) + '%');
+        } else if (event instanceof HttpResponse) {
+          console.log('Upload complete');
+          if (event.body) {
+            this.profileImage = event.body.fileDownloadUri;
+            this.selectImage(event.body.fileDownloadUri);
+          }
+        }
+      }, error => {
+        console.error('Upload failed', error);
+      });
+    }
+  }
+  
+
   submitUserForm(): void {
+    this.userForm.value.image = this.profileImage;
     console.log('Form submitted:', this.userForm.value);
     this.userService.updateUserForm(this.userForm.value).subscribe({
       next: (response) => {
