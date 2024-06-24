@@ -11,7 +11,7 @@ import { Wallet } from '../models/Wallet';
 import { MyMoneyService } from '../service/my-money.service';
 import { MyMoney } from '../models/MyMoney';
 import Swal from 'sweetalert2';
-import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { UploadFileService } from '../service/upload-file.service';
 
 @Component({
@@ -28,6 +28,7 @@ export class SettingComponent implements OnInit {
 
   profileImage: string | undefined;
   selectedFile: File | null = null;
+  previewUrl: any = null;
 
   message: string | undefined;
   error: string | undefined;
@@ -67,8 +68,7 @@ export class SettingComponent implements OnInit {
     private fb: FormBuilder,
     private walletService: WalletService,
     private myMoneyService: MyMoneyService,
-    private uploadFileService: UploadFileService,
-    private http: HttpClient) { 
+    private uploadFileService: UploadFileService) { 
       const defaultUser: User = {
         id: 0, 
         username: '', 
@@ -137,7 +137,7 @@ export class SettingComponent implements OnInit {
     this.userService.getProfile(username).subscribe(
       (data) => {
         this.profile = data;
-        this.profileImage = 'assets/' + this.profile.image;
+        this.previewUrl = 'assets/' + this.profile.image;
       },
       (error) => {
         console.error('Error fetching profile : ', error);
@@ -150,35 +150,49 @@ export class SettingComponent implements OnInit {
     console.log("uploaded image : " + this.selectedImage);
   }
 
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
-    
-    if (this.selectedFile) {
-      this.uploadFileService.uploadProfileImage(this.selectedFile).subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          console.log('Upload Progress: ' + Math.round(event.loaded / event.total! * 100) + '%');
-        } else if (event instanceof HttpResponse) {
-          console.log('Upload complete');
-          if (event.body) {
-            this.profileImage = event.body.fileDownloadUri;
-            this.selectImage(event.body.fileDownloadUri);
-          }
-        }
-      }, error => {
-        console.error('Upload failed', error);
-      });
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+
+      // Preview the selected image
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.previewUrl = e.target.result;
+      reader.readAsDataURL(this.selectedFile);
     }
+
+    if (!this.selectedFile) {
+      return;
+    }
+
+    const fd = new FormData();
+    fd.append('file', this.selectedFile, this.selectedFile.name);
+    // Replace the below URL with your own upload URL
+    const uploadUrl = this.uploadFileService.apiUrl;
+
+    fetch(uploadUrl, {
+      method: 'POST',
+      body: fd
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Upload successful:', data);
+    })
+    .catch(error => {
+      this.showAlert('Upload error', error.message, 'error');
+      console.error('Upload error:', error);
+    });
   }
-  
 
   submitUserForm(): void {
-    this.userForm.value.image = this.profileImage;
-    console.log('Form submitted:', this.userForm.value);
     this.userService.updateUserForm(this.userForm.value).subscribe({
       next: (response) => {
         console.log("response  --->  " + response)
+        this.showAlert('Update successful', '', 'success');
       },
       error: (error) => {
+        this.showAlert('Update errorer', error, 'error');
         console.error('Error  ==>  ', error);
       }
     });
@@ -209,8 +223,8 @@ export class SettingComponent implements OnInit {
     this.userInfoForm.value.username = 'khalil.farouqi';
     this.userService.updateUserForm(this.userInfoForm.value).subscribe({
       next: (response) => {
+        this.showAlert('Update successful', '', 'success');
         console.log("response  --->  " + response)
-        this.userInfoForm.reset();
       },
       error: (error) => {
         console.error('Error  ==>  ', error);
