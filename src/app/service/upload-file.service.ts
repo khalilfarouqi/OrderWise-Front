@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiConfigService } from './api-config-service.service';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class UploadFileService {
     return this.http.post<{ fileDownloadUri: string }>(`${this.apiUrl}`, formData, {
       reportProgress: true,
       observe: 'events'
-    });
+    }).pipe(
+      catchError((error) => {
+        return throwError(error);
+      })
+    );
   }
 }
