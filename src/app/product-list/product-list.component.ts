@@ -24,7 +24,6 @@ export class ProductListComponent implements OnInit {
   getProductsByUsernameUrl(username: string) {
     this.productService.getProductsByUsernameUrl(username).subscribe(
       (data) => {
-        console.log(data);
         this.products = data;
       },
       (error) => {

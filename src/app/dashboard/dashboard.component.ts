@@ -55,7 +55,6 @@ export class DashboardComponent implements OnInit {
     this.orderService.getDashStateUrl(username).subscribe(
       (data) => {
         this.dashState = data;
-        console.log(data);
       },
       (error) => {
         console.error('Error fetching DashState : ', error);
@@ -67,7 +66,6 @@ export class DashboardComponent implements OnInit {
     this.orderService.getOrdersReturnUrl(username).subscribe(
       (data) => {
         this.OrdersReturns = data;
-        console.log(data);
       },
       (error) => {
         console.error('Error fetching Orders Return : ', error);
@@ -79,7 +77,6 @@ export class DashboardComponent implements OnInit {
     this.orderService.getOrdersDeliverUrl(username).subscribe(
       (data) => {
         this.OrdersDelivers = data;
-        console.log(data);
       },
       (error) => {
         console.error('Error fetching Orders Deliver : ', error);
@@ -91,7 +88,6 @@ export class DashboardComponent implements OnInit {
     this.orderService.getOrdersConfirmUrl(username).subscribe(
       (data) => {
         this.OrdersConfirms = data;
-        console.log(data);
       },
       (error) => {
         console.error('Error fetching Orders Confirm : ', error);
@@ -103,7 +99,6 @@ export class DashboardComponent implements OnInit {
     this.orderService.getOrderAssignmentsBySellerUsernameUrl(username).subscribe(
       (data) => {
         this.OrderAssignments = data;
-        console.log(data);
       },
       (error) => {
         console.error('Error fetching Order Assignments : ', error);

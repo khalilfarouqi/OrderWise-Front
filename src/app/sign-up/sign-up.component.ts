@@ -24,7 +24,6 @@ export class SignUpComponent implements OnInit {
   }
 
   submitForm(): void {
-    console.log('Form submitted:', this.contactForm.value);
     this.contactForm.value.username = this.contactForm.value.firstname + '.' + this.contactForm.value.lastname;
     this.contactForm.value.userType = 'NEW_USER';
     this.userService.postUserForm(this.contactForm.value).subscribe({

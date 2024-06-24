@@ -22,7 +22,6 @@ export class ContactUsPageComponent implements OnInit {
   }
 
   submitForm(): void {
-    console.log('Form submitted:', this.contactForm.value);
     this.contactUsService.postContactUsForm(this.contactForm.value).subscribe({
       next: (response) => {
         this.contactForm.reset();

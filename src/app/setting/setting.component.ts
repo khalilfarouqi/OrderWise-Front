@@ -147,7 +147,6 @@ export class SettingComponent implements OnInit {
 
   selectImage(image: string): void {
     this.selectedImage = image;
-    console.log("uploaded image : " + this.selectedImage);
   }
 
   onFileSelected(event: Event): void {
@@ -177,18 +176,15 @@ export class SettingComponent implements OnInit {
     })
     .then(response => response.json())
     .then(data => {
-      console.log('Upload successful:', data);
     })
     .catch(error => {
       this.showAlert('Upload error', error.message, 'error');
-      console.error('Upload error:', error);
     });
   }
 
   submitUserForm(): void {
     this.userService.updateUserForm(this.userForm.value).subscribe({
       next: (response) => {
-        console.log("response  --->  " + response)
         this.showAlert('Update successful', '', 'success');
       },
       error: (error) => {
@@ -205,10 +201,8 @@ export class SettingComponent implements OnInit {
         username: 'khalil.farouqi'
       }
     };
-    console.log('Form submitted:', data);
     this.myMoneyService.postMyMoney(data).subscribe({
       next: (response) => {
-        console.log("response  --->  " + response)
         this.myMoneyForm.reset();
       },
       error: (error) => {
@@ -219,12 +213,10 @@ export class SettingComponent implements OnInit {
   }
 
   submitUserInfoForm(): void {
-    console.log('Form submitted:', this.userInfoForm.value);
     this.userInfoForm.value.username = 'khalil.farouqi';
     this.userService.updateUserForm(this.userInfoForm.value).subscribe({
       next: (response) => {
         this.showAlert('Update successful', '', 'success');
-        console.log("response  --->  " + response)
       },
       error: (error) => {
         console.error('Error  ==>  ', error);
@@ -233,12 +225,9 @@ export class SettingComponent implements OnInit {
   }
 
   submitPasswordForm(): void {
-    console.log('Form submitted:', this.passwordForm.value);
     this.passwordForm.value.username = 'khalil.farouqi';
     this.userService.updatePassword(this.passwordForm.value).subscribe({
       next: (response) => {
-        console.log("response  --->  " + response);
-
         this.message = 'Password changed successfully!';
         this.error = undefined;
 
@@ -255,7 +244,6 @@ export class SettingComponent implements OnInit {
     this.walletService.getWallatByUsername(username).subscribe(
       (data) => {
         this.wallet = data;
-        console.log(this.wallet);
       },
       (error) => {
         console.error('Error fetching wallet : ', error);

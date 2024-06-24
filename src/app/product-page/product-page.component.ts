@@ -26,7 +26,6 @@ export class ProductPageComponent implements OnInit {
   getProductsByIdUrl(id: number) {
     this.productService.getProductsByIdUrl(id).subscribe(
       (data) => {
-        console.log(data);
         this.product = data;
       },
       (error) => {
