@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../service/notification.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-notification-list',
@@ -17,15 +18,28 @@ export class NotificationListComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.getNotification();
+    this.getNotification('khalil.farouqi');
   }
   
-  removeNotification(index: number): void {
+  removeNotification(index: number, notificationId: number): void {
     this.notifications.splice(index, 1);
+    this.markAsRead(notificationId);
   }
 
-  getNotification() {
-    this.notificationService.getNotificationUrl().subscribe(
+  markAsRead(notificationId: number) {
+    this.notificationService.readNotification(notificationId).subscribe(
+      response => {
+        this.showAlert('Notification marked as read', response.message, 'success');
+      },
+      error => {
+        this.showAlert('Error marking notification as read', error, 'error');
+        console.error('Error  ==>  ', error);
+      }
+    );
+  }
+
+  getNotification(username: string) {
+    this.notificationService.getNotificationUrl(username).subscribe(
       (data) => {
         this.notifications = data;
       },
@@ -33,6 +47,15 @@ export class NotificationListComponent implements OnInit {
         console.error('Error fetching notifications:', error);
       }
     );
+  }
+
+  showAlert(title: string, text: string, icon: any) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      confirmButtonText: 'OK'
+    });
   }
 
 }

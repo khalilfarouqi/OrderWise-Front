@@ -4,16 +4,16 @@
     <h1>All Notifications</h1>
     <div *ngIf="notifications.length; else noNotifications">
         <div *ngFor="let notification of notifications; let i = index" class="notification-item">
-        <button class="close-btn" (click)="removeNotification(i)">&times;</button>
-        <div class="notification-header">
-            <span class="notification-badge">{{ notification.badge }}</span>
-            <span class="timestamp">{{ notification.timestamp | date:'dd MMM yyyy at h:mm a' }}</span>
-        </div>
-        <div class="notification-body">
-            <h3>{{ notification.title }}</h3>
-            <p>{{ notification.message }}</p>
-            <p class="notification-user">{{ notification.user }}</p>
-        </div>
+            <button class="close-btn" (click)="removeNotification(i, notification.id)">&times;</button>
+            <div class="notification-header">
+                <span class="notification-badge">{{ notification.object }}</span>
+                <span class="timestamp">{{ notification.notificationGroup.dateEnvoy | date:'dd MMM yyyy at h:mm a' }}</span>
+            </div>
+            <div class="notification-body">
+                <h3>{{ notification.notificationGroup.object }}</h3>
+                <p>{{ notification.notificationGroup.body }}</p>
+                <p class="notification-user">{{ notification.user.firstname }} {{ notification.user.lastname }}</p>
+            </div>
         </div>
     </div>
     <ng-template #noNotifications>
