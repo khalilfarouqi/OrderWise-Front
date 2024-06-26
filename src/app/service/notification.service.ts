@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiConfigService } from './api-config-service.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,7 +13,12 @@ export class NotificationService {
     this.apiUrl = this.apiConfig.getNotificationUrl(); 
   }
 
-  getNotificationUrl(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + '/getAll');
+  getNotificationUrl(username: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/getAllNotificationNotRead/${username}`);
+  }
+
+  readNotification(id: number): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'text/plain' });
+    return this.http.post(`${this.apiUrl}/readNotification/${id}`, {}, { headers, responseType: 'text' });
   }
 }
