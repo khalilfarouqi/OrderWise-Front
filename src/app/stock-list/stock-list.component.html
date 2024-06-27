@@ -1,0 +1,36 @@
+<app-side-bar (sidebarToggled)="onSidebarToggled($event)"></app-side-bar>
+<app-nav-bar></app-nav-bar>
+<div class="main-content" [class.main-content-open]="isSidebarOpen">
+  <div class="order-content">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product Nom</th>
+            <th scope="col">Description</th>
+            <th scope="col">Selling price</th>
+            <th scope="col">Purchase price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Addition date</th>
+            <th scope="col">Last modified date</th>
+            <th scope="col">Last sale date</th>
+            <th scope="col">Modifier</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stock of stocks">
+            <td><a href="/product-page/{{stock.product.id}}">{{stock.product.productNom}}</a></td>
+            <td>{{stock.product.description}}</td>
+            <td>{{stock.product.sellingPrice}}</td>
+            <td>{{stock.product.purchasePrice}}</td>
+            <td>{{stock.quantity}}</td>
+            <td>{{stock.additionDate | date: 'dd/MM/YY, hh:mm'}}</td>
+            <td>{{stock.lastModifiedDate | date: 'dd/MM/YY, hh:mm'}}</td>
+            <td>{{stock.lastSaleDate | date: 'dd/MM/YY, hh:mm'}}</td>
+            <td>
+              <input type="button" id="modif" value="Modifier">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>

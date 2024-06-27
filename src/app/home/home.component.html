@@ -1,0 +1,36 @@
+<app-contact-bar></app-contact-bar>
+<app-nav-bar-home></app-nav-bar-home>
+<div class="tracking-container">
+    <h2>Suivez votre commande</h2>
+    <form (ngSubmit)="submitTrackingCode()">
+      <input type="text" name="trackingCode" placeholder="Entrez votre code de suivi" required>
+      <button type="submit">Suivre</button>
+    </form>
+</div>
+
+<div class="about-us-container">
+    <h2>Qui sommes-nous</h2>
+    <p>
+      The Order Management System is a backend web application designed to streamline the management of orders for e-commerce businesses. Whether handling a few orders or a large volume of transactions, this system provides a robust platform to efficiently manage and track orders from placement to delivery.
+    </p>
+</div>
+
+<div class="process-container">
+    <h2>Votre processus de travail</h2>
+    <p>
+      Our process is designed to ensure that orders are managed efficiently and effectively. From the moment an order is placed, our system tracks its progress through various stages: processing, shipping, and delivery. We provide real-time updates and ensure that any issues are quickly addressed to maintain customer satisfaction.
+    </p>
+</div>
+
+<div class="advantages-container">
+    <h2>Les avantages de choisir OrderWise</h2>
+    <ul>
+      <li>Interface utilisateur intuitive et facile à utiliser</li>
+      <li>Gestion efficace des commandes et des stocks</li>
+      <li>Intégration transparente avec les principales plateformes de commerce électronique</li>
+      <li>Mises à jour en temps réel et suivi des commandes</li>
+      <li>Support client exceptionnel et assistance technique</li>
+      <li>Sécurité des données et conformité aux normes de l'industrie</li>
+    </ul>
+</div>
+<app-footer></app-footer>

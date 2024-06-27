@@ -1,0 +1,41 @@
+
+.main-content {
+    margin-left: 78px;
+    transition: margin-left 0.5s;
+    padding: 16px;
+}
+.main-content-open {
+    margin-left: 250px;
+}
+.order-content {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+.card-header {
+    padding: 10px;
+}
+
+.card-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.card-category {
+    margin: 0;
+    color: #999;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 24px;
+}
+.order-confirmed-icon {
+    color: green;
+}
+.delivery-icon {
+    color: blue;
+}
+.return-icon {
+    color: orange;
+}

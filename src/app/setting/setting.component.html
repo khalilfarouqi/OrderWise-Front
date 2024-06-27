@@ -1,0 +1,371 @@
+<app-side-bar (sidebarToggled)="onSidebarToggled($event)"></app-side-bar>
+<app-nav-bar></app-nav-bar>
+<div class="main-content" [class.main-content-open]="isSidebarOpen">
+    <div class="container p-0">
+        <h1 class="h3 mb-3">Settings</h1>
+        <div class="row">
+            <div class="col-md-5 col-xl-4">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Profile Settings</h5>
+                    </div>
+
+                    <div class="list-group list-group-flush" role="tablist">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account" role="tab">
+                            Account
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#wallet" role="tab">
+                            Wallet
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
+                            Password
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#privacy" role="tab">
+                            Privacy and safety
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#email" role="tab">
+                            Email notifications
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#web" role="tab">
+                            Web notifications
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#widgets" role="tab">
+                            Widgets
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#data" role="tab">
+                            Your data
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#delete" role="tab" style="background-color: red; color: white;">
+                            Delete account
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7 col-xl-8">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="account" role="tabpanel">
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Public info</h5>
+                            </div>
+                            <div class="card-body">
+                                <form [formGroup]="userForm" (ngSubmit)="submitUserForm()">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="inputUsername">Username</label>
+                                                <input type="text" class="form-control" id="inputUsername" formControlName="username" placeholder="Username" [(ngModel)]="profile.username" name="username">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="text-center">
+                                                <img [alt]="profile.firstname" [src]="previewUrl" class="rounded-circle img-responsive mt-2" width="128" height="128">
+                                                <div class="mt-2">
+                                                    <span class="btn btn-primary">
+                                                        <i class="fa fa-upload"></i>
+                                                        <input type="file" (change)="onFileSelected($event)" formControlName="image" placeholder="Image" name="image" style="opacity: 0; position: absolute; left: 0; top: 0; bottom: 0; right: 0; cursor: pointer;">
+                                                    </span>
+                                                </div>
+                                                <small>{{ profile.image }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Private info</h5>
+                            </div>
+                            <div class="card-body">
+                                <form [formGroup]="userInfoForm" (ngSubmit)="submitUserInfoForm()">
+                                    <div class="form-group">
+                                        <label for="inputGender">Genre</label>
+                                        <select id="inputGender" class="form-control" formControlName="gender">
+                                            <option value="">{{profile.gender}}</option>
+                                            <option *ngFor="let gender of genderEntries" [value]="gender.key">{{ gender.value }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputFirstName">Prénom</label>
+                                            <input type="text" class="form-control" [(ngModel)]="profile.firstname" id="inputFirstName" placeholder="Prénom" formControlName="firstname">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputLastName">Nom</label>
+                                            <input type="text" class="form-control" [(ngModel)]="profile.lastname" id="inputLastName" placeholder="Nom" formControlName="lastname">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputCIN">CIN</label>
+                                            <input type="text" class="form-control" [(ngModel)]="profile.cin" id="inputCIN" placeholder="CIN" formControlName="cin">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputCity">Ville</label>
+                                            <select id="inputCity" class="form-control" formControlName="city">
+                                                <option value="">{{profile.city}}</option>
+                                                <option *ngFor="let city of cityEntries" [value]="city.key">{{ city.value }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail4">Email</label>
+                                        <input type="email" class="form-control" [(ngModel)]="profile.email" id="inputEmail4" placeholder="Email" formControlName="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputTel">Téléphone</label>
+                                        <input type="text" class="form-control" [(ngModel)]="profile.tel" id="inputTel" placeholder="Téléphone" formControlName="tel">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Sauvegarder les modifications</button>                             
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="password" role="tabpanel">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Password</h5>
+
+                                <form [formGroup]="passwordForm" (ngSubmit)="submitPasswordForm()">
+                                    <div class="form-group">
+                                        <label for="inputPasswordCurrent">Current password</label>
+                                        <input type="password" class="form-control" id="inputPasswordCurrent" formControlName="oldPassword">
+                                        <small><a href="#">Forgot your password?</a></small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPasswordNew">New password</label>
+                                        <input type="password" class="form-control" id="newPassword" formControlName="newPassword" placeholder="newPassword">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPasswordNew2">Verify password</label>
+                                        <input type="password" class="form-control" id="confirmNewPassword" formControlName="confirmNewPassword" placeholder="confirmNewPassword">
+                                    </div>
+                                    <div *ngIf="passwordForm.hasError('mismatch') && passwordForm.get('confirmNewPassword')?.touched" class="text-danger">
+                                        Passwords do not match.
+                                    </div>
+                                    <div *ngIf="passwordForm.get('newPassword')?.errors?.['minlength'] && passwordForm.get('newPassword')?.touched" class="text-danger">
+                                        New password is less than 6 characters.
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" [disabled]="passwordForm.invalid">Save changes</button>
+                                </form>
+                                <div *ngIf="message" class="message">
+                                    {{ message }}
+                                </div>
+                                
+                                <div *ngIf="error" class="error">
+                                    {{ error }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="privacy" role="tabpanel">
+                        <!-- Content for Privacy and safety -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Privacy and Safety</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Adjust your privacy settings to control who can see your activity and personal information.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="privacySettings">Privacy Settings</label>
+                                        <select class="form-control" id="privacySettings">
+                                            <option>Public</option>
+                                            <option>Friends Only</option>
+                                            <option>Private</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="email" role="tabpanel">
+                        <!-- Content for Email notifications -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Email Notifications</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Manage your email notification preferences.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label>Email me when:</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="emailUpdates">
+                                            <label class="form-check-label" for="emailUpdates">
+                                                There are updates to my account
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="emailMessages">
+                                            <label class="form-check-label" for="emailMessages">
+                                                I receive new messages
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="emailActivity">
+                                            <label class="form-check-label" for="emailActivity">
+                                                There is activity on my profile
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="web" role="tabpanel">
+                        <!-- Content for Web notifications -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Web Notifications</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Configure how you receive notifications on the web.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label>Notify me about:</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="webUpdates">
+                                            <label class="form-check-label" for="webUpdates">
+                                                Updates to my account
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="webMessages">
+                                            <label class="form-check-label" for="webMessages">
+                                                New messages
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="webActivity">
+                                            <label class="form-check-label" for="webActivity">
+                                                Activity on my profile
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="widgets" role="tabpanel">
+                        <!-- Content for Widgets -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Widgets</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Customize the widgets displayed on your dashboard.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label>Select Widgets:</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="widgetWeather">
+                                            <label class="form-check-label" for="widgetWeather">
+                                                Weather
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="widgetNews">
+                                            <label class="form-check-label" for="widgetNews">
+                                                News
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="widgetStocks">
+                                            <label class="form-check-label" for="widgetStocks">
+                                                Stocks
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="data" role="tabpanel">
+                        <!-- Content for Your data -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Your Data</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Manage your data and privacy settings.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="dataDownload">Download your data:</label>
+                                        <button class="btn btn-secondary" id="dataDownload">Download</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dataRequest">Request data deletion:</label>
+                                        <button class="btn btn-danger" id="dataRequest">Request Deletion</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="delete" role="tabpanel">
+                        <!-- Content for Delete account -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Delete Account</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Warning: Deleting your account is permanent and cannot be undone.</p>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="deletePassword">Enter your password to confirm:</label>
+                                        <input type="password" class="form-control" id="deletePassword">
+                                    </div>
+                                    <button type="submit" class="btn btn-danger">Delete my account</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="wallet" role="tabpanel">
+                        <!-- Content for wallet -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Wallet</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Manage your wallet and payment methods.</p>
+                                <form [formGroup]="myMoneyForm" (ngSubmit)="submitMyMoneyForm()">
+                                    <div class="form-group">
+                                        <label for="sold">Votre Solde : </label>
+                                        <input type="text" class="form-control" id="sold" value="{{wallet.sold}} DH" disabled style="color: #4CAF50;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="amountCredited">Amount credited : </label>
+                                        <input type="text" class="form-control" id="amountCredited" value="{{wallet.amountCredited}} DH" disabled style="color: #2196F3;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="amountDeposited">Amount deposited : </label>
+                                        <input type="text" class="form-control" id="amountDeposited" value="{{wallet.amountDeposited}} DH" disabled style="color: #F44336;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addFunds">Demande un montant</label>
+                                        <input type="number" class="form-control" id="addFunds" placeholder="Enter montant demander" formControlName="montant">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Envoyer la demande</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

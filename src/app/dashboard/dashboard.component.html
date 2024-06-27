@@ -1,0 +1,279 @@
+<app-side-bar (sidebarToggled)="onSidebarToggled($event)"></app-side-bar>
+<app-nav-bar></app-nav-bar>
+<div class="main-content" [class.main-content-open]="isSidebarOpen">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="fas fa-sack-dollar"></i>
+                        </div>
+                        <p class="card-category">Total Sales</p>
+                        <h3 class="card-title">{{ dashState.totalSales }} <small>DH</small></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <mat-tab-group>
+                        <mat-tab label="This Month">
+                            <div class="card-header card-header-success card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">check_circle</i>
+                                </div>
+                                <p class="card-category">Order Treated This Month</p>
+                                <h3 class="card-title">{{dashState.currentMonthOrderCount}}</h3>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Today">
+                            <div class="card-header card-header-info card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">today</i>
+                                </div>
+                                <p class="card-category">Order Treated Today</p>
+                                <h3 class="card-title">{{dashState.currentDayOrderCount}}</h3>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">cancel</i>
+                        </div>
+                        <p class="card-category">Order Rejected in Confirmation</p>
+                        <h3 class="card-title">{{dashState.ordersRejectedInConfirmation}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">block</i>
+                        </div>
+                        <p class="card-category">Order Rejected in Delivery</p>
+                        <h3 class="card-title">{{dashState.ordersRejectedInDelivery}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">directions_bike</i>
+                        </div>
+                        <p class="card-category">Order in Progress</p>
+                        <h3 class="card-title">{{dashState.ordersInProgress}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">warning</i>
+                        </div>
+                        <p class="card-category">Order Not Treated</p>
+                        <h3 class="card-title">{{dashState.ordersNotTreated}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">reply</i>
+                        </div>
+                        <p class="card-category">Order Return</p>
+                        <h3 class="card-title">{{dashState.ordersReturned}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">check</i>
+                        </div>
+                        <p class="card-category">Order Valid</p>
+                        <h3 class="card-title">{{dashState.ordersValidated}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-body">
+                        <h4 class="card-title">Commande a confirmée</h4>
+                        <p class="card-category">
+                            {{dashState.ordersToConfirm}} commandes ne sont pas encore validées.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated {{ updatedTimeOrdersToConfirm }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-body">
+                        <h4 class="card-title">Commande a livrée</h4>
+                        <p class="card-category">{{dashState.ordersToDeliver}} commandes ont été validées mais ne sont pas encore livrées.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated {{ updatedTimeOrdersToDeliver }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-body">
+                        <h4 class="card-title">Commandes à retourner</h4>
+                        <p class="card-category">{{dashState.ordersToReturn}} commandes doivent être renvoyées.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated {{ updatedTimeOrdersToReturn }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Aperçu des commandes :</span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link active" href="#Confirmation" data-toggle="tab">
+                                            <i class="fas fa-check-circle order-confirmed-icon"></i> Confirmation
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#Livrée" data-toggle="tab">
+                                            <i class="fas fa-truck delivery-icon"></i> Livrée
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#Retourner" data-toggle="tab">
+                                            <i class="fas fa-undo return-icon"></i> Retourner
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Confirmation">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Code</th>
+                                            <th scope="col">Date Create</th>
+                                            <th scope="col">Date de confirmation</th>
+                                            <th scope="col">Prix</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let ordersConfirm of OrdersConfirms">
+                                            <td>{{ordersConfirm.trackingCode}}</td>
+                                            <td>{{ordersConfirm.orderDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                            <td>{{ordersConfirm.confirmationDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                            <td>{{ordersConfirm.totalPrice}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="Livrée">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Code</th>
+                                            <th scope="col">Date Create</th>
+                                            <th scope="col">Date de Livréssont</th>
+                                            <th scope="col">Prix</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let ordersDeliver of OrdersDelivers">
+                                            <td>{{ordersDeliver.trackingCode}}</td>
+                                            <td>{{ordersDeliver.orderDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                            <td>{{ordersDeliver.deliveryDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                            <td>{{ordersDeliver.totalPrice}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="Retourner">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Code</th>
+                                            <th scope="col">Date Create</th>
+                                            <th scope="col">Date de retour</th>
+                                            <th scope="col">Prix</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let ordersReturn of OrdersReturns">
+                                            <td>{{ordersReturn.trackingCode}}</td>
+                                            <td>{{ordersReturn.orderDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                            <td>{{ordersReturn.returnDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                            <td>{{ordersReturn.totalPrice}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-warning">
+                        <h4 class="card-title">Dernier traitement de commande</h4>
+                        <p class="card-category">La dernière commande a été traitée.</p>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-hover">
+                            <thead class="text-warning">
+                                <tr>
+                                    <th scope="col">Code</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Étape</th>
+                                    <th scope="col">Statut</th>
+                                    <th scope="col">Prix</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let orderAssignment of OrderAssignments">
+                                    <td>{{orderAssignment.order.trackingCode}}</td>
+                                    <td>{{orderAssignment.assignmentDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                    <td>{{orderAssignment.order.stage}}</td>
+                                    <td>{{orderAssignment.order.status}}</td>
+                                    <th>{{orderAssignment.order.totalPrice}} DH</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

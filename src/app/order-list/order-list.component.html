@@ -1,0 +1,86 @@
+<app-side-bar (sidebarToggled)="onSidebarToggled($event)"></app-side-bar>
+<app-nav-bar></app-nav-bar>
+<div class="main-content" [class.main-content-open]="isSidebarOpen">
+  <div class="order-content">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">N° Commande</th>
+            <th scope="col">Action</th>
+            <th scope="col">Status</th>
+            <th scope="col">Nom du client</th>
+            <th scope="col">Tel du client</th>
+            <th scope="col">Ville client</th>
+            <th scope="col">Nom du Produit</th>
+            <th scope="col">Prix uniter</th>
+            <th scope="col">Qty Commandé</th>
+            <th scope="col">Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{order.trackingCode}}</td>
+            <td>{{order.stage}}</td>
+            <td>{{order.status}}</td>
+            <td>{{order.customer.completeNom}}</td>
+            <td>{{order.customer.tel}}</td>
+            <td>{{order.customer.city}}</td>
+            <td *ngFor="let item of order.cart.items"><a href="/product-page/{{item.product.id}}" >{{item.product.productNom}}</a></td>
+            <td *ngFor="let item of order.cart.items">{{item.product.sellingPrice}}</td>
+            <td *ngFor="let item of order.cart.items">{{item.qty}}</td>
+            <td>{{order.totalPrice}} DH</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
+<!--<app-side-bar (sidebarToggled)="onSidebarToggled($event)"></app-side-bar>
+<app-nav-bar></app-nav-bar>
+<div class="main-content" [class.main-content-open]="isSidebarOpen">
+  <div class="order-content">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">N° Commande</th>
+            <th scope="col">Action</th>
+            <th scope="col">Status</th>
+            <th scope="col">Nom du client</th>
+            <th scope="col">Tel du client</th>
+            <th scope="col">Ville client</th>
+            <th scope="col" style="text-align: center;">Produit</th>
+            <th scope="col">Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{order.trackingCode}}</td>
+            <td>{{order.stage}}</td>
+            <td>{{order.status}}</td>
+            <td>{{order.customer.completeNom}}</td>
+            <td>{{order.customer.tel}}</td>
+            <td>{{order.customer.city}}</td>
+            <td>
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Qty</th> 
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of order.cart.items">
+                    <td>{{item.product.productNom}}</td>
+                    <td>{{item.product.sellingPrice}}</td>
+                    <td>{{item.qty}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>{{order.totalPrice}} DH</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
+-->

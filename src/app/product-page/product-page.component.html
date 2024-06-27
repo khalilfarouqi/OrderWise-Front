@@ -1,0 +1,15 @@
+<app-side-bar (sidebarToggled)="onSidebarToggled($event)"></app-side-bar>
+<app-nav-bar></app-nav-bar>
+<div class="main-content" [class.main-content-open]="isSidebarOpen">
+  <div class="product-detail">
+    <div class="product-images">
+      <img [src]="product?.photo.image1" alt="Product Image">
+    </div>
+    <div class="product-info">
+      <h1>{{ product?.productNom }}</h1>
+      <p class="price">{{ product?.sellingPrice }} DH </p>
+      <p class="purchase-price">Purchase Price: {{ product?.purchasePrice }} DH</p>
+      <p class="weight">Weight: {{ product?.weight }} kg</p>
+    </div>
+  </div>
+</div>
