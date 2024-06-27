@@ -10,49 +10,49 @@
       <input type="text" placeholder="Search...">
       <span class="tooltip">Search</span>
     </li>
-    <li>
+    <li (click)="onButtonClick('Dashboard', '/dashboard', $event)">
       <a href="dashboard">
         <i class='bx bx-grid-alt'></i>
         <span class="links_name">Dashboard</span>
       </a>
       <span class="tooltip">Dashboard</span>
     </li>
-    <li>
+    <li *ngIf="role != 'NEW_USER' && role != 'ADMIN'" (click)="onButtonClick('Order', '/order', $event)">
       <a href="order">
         <i class='bx bx-cart-alt' ></i>
         <span class="links_name">Order</span>
       </a>
       <span class="tooltip">Order</span>
     </li>
-    <li>
+    <li *ngIf="role == 'SELLER' || role == 'DELIVERY_BOY'" (click)="onButtonClick('Product', '/product', $event)">
       <a href="product">
         <i class='bx bx-package' ></i>
         <span class="links_name">Product</span>
       </a>
       <span class="tooltip">Product</span>
     </li>
-    <li>
+    <li *ngIf="role == 'SELLER' || role == 'ADMIN'" (click)="onButtonClick('Stock', '/stock', $event)">
       <a href="stock">
         <i class='bx bx-box' ></i>
         <span class="links_name">Stock</span>
       </a>
       <span class="tooltip">Stock</span>
     </li>
-    <li>
+    <li *ngIf="role == 'SELLER'" (click)="onButtonClick('Notification', '/notification', $event)">
       <a href="notification">
         <i class='bx bx-bell' ></i>
         <span class="links_name">Notification</span>
       </a>
       <span class="tooltip">Notification</span>
     </li>
-    <li>
+    <li *ngIf="role == 'SELLER'" (click)="onButtonClick('Analytics', '/analytics', $event)">
       <a href="analytics">
         <i class='bx bx-pie-chart-alt-2' ></i>
         <span class="links_name">Analytics</span>
       </a>
       <span class="tooltip">Analytics</span>
     </li>
-    <li>
+    <li (click)="onButtonClick('Setting', '/setting', $event)">
       <a href="setting">
         <i class='bx bx-cog' ></i>
         <span class="links_name">Setting</span>

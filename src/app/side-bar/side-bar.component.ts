@@ -1,11 +1,13 @@
-import { AfterViewInit, Component, ElementRef, ViewChild, Renderer2, Output, EventEmitter } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, Renderer2, Output, EventEmitter, OnInit } from '@angular/core';
+import { SidebarService } from '../service/sidebar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css'
 })
-export class SideBarComponent implements AfterViewInit {
+export class SideBarComponent implements AfterViewInit, OnInit {
   @ViewChild('btn') closeBtn!: ElementRef;
   @ViewChild('sidebar') sidebar!: ElementRef;
   @ViewChild('searchBtn') searchBtn!: ElementRef;
@@ -13,8 +15,16 @@ export class SideBarComponent implements AfterViewInit {
   @Output() sidebarToggled = new EventEmitter<boolean>();
 
   isOpen = true;
+  role!: string; 
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, 
+    private sidebarService: SidebarService, 
+    private router: Router) {}
+
+  ngOnInit(): void {
+    //ADMIN, SELLER, DELIVERY_BOY, CONFIRMATION, NEW_USER
+    this.role = 'SELLER';
+  }
 
   ngAfterViewInit(): void {
     this.renderer.listen(this.closeBtn.nativeElement, 'click', () => {
@@ -47,5 +57,11 @@ export class SideBarComponent implements AfterViewInit {
       this.renderer.removeClass(this.closeBtn.nativeElement, 'bx-menu-alt-right');
       this.renderer.addClass(this.closeBtn.nativeElement, 'bx-menu');
     }
+  }
+
+  onButtonClick(button: string, route: string, event: Event) {
+    event.preventDefault();
+    this.sidebarService.selectButton(button);
+    this.router.navigate([route]);
   }
 }
