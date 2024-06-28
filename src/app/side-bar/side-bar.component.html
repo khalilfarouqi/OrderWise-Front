@@ -24,7 +24,7 @@
       </a>
       <span class="tooltip">Order</span>
     </li>
-    <li *ngIf="role == 'SELLER' || role == 'DELIVERY_BOY'" (click)="onButtonClick('Product', '/product', $event)">
+    <li *ngIf="role == 'SELLER' || role == 'ADMIN'" (click)="onButtonClick('Product', '/product', $event)">
       <a href="product">
         <i class='bx bx-package' ></i>
         <span class="links_name">Product</span>
