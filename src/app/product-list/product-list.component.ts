@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class ProductListComponent implements OnInit {
   products: any[] = [];
   isSidebarOpen = true;
+  role!: string;
 
   constructor(private productService: ProductService, private router: Router) { }
 
@@ -18,11 +19,26 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProductsByUsernameUrl('khalil.farouqi');
+    this.role = 'SELLER';
+    if (this.role == 'SELLER')
+      this.getProductsByUsernameUrl('khalil.farouqi');
+    else if(this.role == 'ADMIN')
+      this.getAllProducts();
   }
 
   getProductsByUsernameUrl(username: string) {
     this.productService.getProductsByUsernameUrl(username).subscribe(
+      (data) => {
+        this.products = data;
+      },
+      (error) => {
+        console.error('Error fetching products:', error);
+      }
+    );
+  }
+
+  getAllProducts() {
+    this.productService.getProductUrl().subscribe(
       (data) => {
         this.products = data;
       },
