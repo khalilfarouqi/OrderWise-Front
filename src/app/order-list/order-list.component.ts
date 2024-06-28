@@ -11,6 +11,7 @@ export class OrderListComponent implements OnInit {
   orders: any[] = [];
   isSidebarOpen = true;
   role!: string;
+  usenameDe!: string;
 
   constructor(private orderService: OrderService, private router: Router) { }
 
@@ -19,15 +20,17 @@ export class OrderListComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.role = 'SELLER';
+    this.role = 'DELIVERY_BOY';
+    this.usenameDe = 'khalil.farouqi';
+
     if (this.role == 'SELLER')
-      this.getOrders('khalil.farouqi');
+      this.getOrders(this.usenameDe);
     else if(this.role == 'ADMIN')
       this.getAllOrders();
     else if(this.role == 'DELIVERY_BOY')
-      this.getOrdersToDelivery('khalil.farouqi');
+      this.getOrdersToDelivery(this.usenameDe);
     else if(this.role == 'CONFIRMATION')
-      this.getOrdersToConfirmation('CONFIRMATION');
+      this.getOrdersToConfirmation(this.role);
   }
 
   getOrders(username: string) {
