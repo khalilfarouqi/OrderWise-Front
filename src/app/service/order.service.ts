@@ -37,7 +37,7 @@ export class OrderService {
   }
 
   getOrdersToDeliveryUrl(username: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/order-to-delive/${username}`);
+    return this.http.get<any[]>(`${this.apiUrl}/order-to-deliver/${username}`);
   }
 
   getOrdersToConfirmationUrl(stage: string): Observable<any[]> {
