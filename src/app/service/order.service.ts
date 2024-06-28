@@ -36,6 +36,14 @@ export class OrderService {
     return this.http.get<any[]>(`${this.apiUrl}/deliver/${username}`);
   }
 
+  getOrdersToDeliveryUrl(username: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/order-to-delive/${username}`);
+  }
+
+  getOrdersToConfirmationUrl(stage: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/by-stage/${stage}`);
+  }
+
   getOrdersReturnUrl(username: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/return/${username}`);
   }

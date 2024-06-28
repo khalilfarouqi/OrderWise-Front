@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class StockListComponent implements OnInit {
   stocks: any[] = [];
   isSidebarOpen = true;
+  role!: string; 
 
   constructor(private stockService: StockService, private router: Router) { }
 
@@ -18,11 +19,26 @@ export class StockListComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.getStocksByUsernameUrl('khalil.farouqi');
+    this.role = 'SELLER';
+    if (this.role == 'SELLER')
+      this.getStocksByUsernameUrl('khalil.farouqi');
+    else if(this.role == 'ADMIN')
+      this.getAllStocks();
   }
 
   getStocksByUsernameUrl(username: string) {
     this.stockService.getStocksByUsernameUrl(username).subscribe(
+      (data) => {
+        this.stocks = data;
+      },
+      (error) => {
+        console.error('Error fetching stocks:', error);
+      }
+    );
+  }
+
+  getAllStocks() {
+    this.stockService.getStockUrl().subscribe(
       (data) => {
         this.stocks = data;
       },
