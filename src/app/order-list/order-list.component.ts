@@ -20,7 +20,7 @@ export class OrderListComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.role = 'DELIVERY_BOY';
+    this.role = 'SELLER';
     this.usenameDe = 'khalil.farouqi';
 
     if (this.role == 'SELLER')
@@ -30,7 +30,7 @@ export class OrderListComponent implements OnInit {
     else if(this.role == 'DELIVERY_BOY')
       this.getOrdersToDelivery(this.usenameDe);
     else if(this.role == 'CONFIRMATION')
-      this.getOrdersToConfirmation(this.role);
+      this.getOrdersToConfirmation('CONFIRMATION');
   }
 
   getOrders(username: string) {

@@ -28,6 +28,10 @@ export class OrderService {
     return this.http.get<DashboardBean>(`${this.apiUrl}/dashboard-state/${username}`);
   }
 
+  getDashAllStateUrl(): Observable<DashboardBean> {
+    return this.http.get<DashboardBean>(`${this.apiUrl}/dashboard-state`);
+  }
+
   getOrdersConfirmUrl(username: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/confirm/${username}`);
   }
@@ -41,6 +45,10 @@ export class OrderService {
   }
 
   getOrdersToConfirmationUrl(stage: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/by-stage/${stage}`);
+  }
+
+  getOrdersByStageUrl(stage: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/by-stage/${stage}`);
   }
 
