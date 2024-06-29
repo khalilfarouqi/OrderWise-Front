@@ -11,6 +11,7 @@ export class DashboardComponent implements OnInit {
 
   period: string = 'monthly';
   isSidebarOpen = true;
+  role!: string;
 
   updatedTimeOrdersToConfirm!: string;
   updatedTimeOrdersToDeliver!: string;
@@ -41,16 +42,36 @@ export class DashboardComponent implements OnInit {
   constructor(private orderService :OrderService) { }
 
   ngOnInit(): void {
-    this.getStatic('khalil.farouqi');
-    this.getOrdersReturn('khalil.farouqi');
-    this.getOrdersDeliver('khalil.farouqi');
-    this.getOrdersConfirm('khalil.farouqi');
-    this.getOrderAssignmentsBySellerUsername('khalil.farouqi');
+    this.role == 'SELLER';
+    if (this.role == 'ADMIN') {
+      this.getAllStatic();
+      this.getAllOrdersReturn();
+      this.getAllOrdersDeliver();
+      this.getAllOrdersConfirm();
+      this.getAllOrder();
+    } else {
+      this.getStatic('khalil.farouqi');
+      this.getOrdersReturn('khalil.farouqi');
+      this.getOrdersDeliver('khalil.farouqi');
+      this.getOrdersConfirm('khalil.farouqi');
+      this.getOrderAssignmentsBySellerUsername('khalil.farouqi');
+    }
     this.updateTimeDisplay();
   }
 
   getStatic(username: string){
     this.orderService.getDashStateUrl(username).subscribe(
+      (data) => {
+        this.dashState = data;
+      },
+      (error) => {
+        console.error('Error fetching DashState : ', error);
+      }
+    );
+  }
+
+  getAllStatic(){
+    this.orderService.getDashAllStateUrl().subscribe(
       (data) => {
         this.dashState = data;
       },
@@ -104,6 +125,17 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  getAllOrder(){
+    this.orderService.getOrderUrl().subscribe(
+      (data) => {
+        this.OrderAssignments = data;
+      },
+      (error) => {
+        console.error('Error fetching Order Assignments : ', error);
+      }
+    );
+  }
+
   setPeriod(period: string) {
     this.period = period;
   }
@@ -137,5 +169,38 @@ export class DashboardComponent implements OnInit {
     }
     const days = Math.floor(hours / 24);
     return `${days} days ago`;
+  }
+
+  getAllOrdersReturn(){
+    this.orderService.getOrdersByStageUrl('RETURN').subscribe(
+      (data) => {
+        this.OrdersReturns = data;
+      },
+      (error) => {
+        console.error('Error fetching Orders Return : ', error);
+      }
+    );
+  }
+
+  getAllOrdersDeliver(){
+    this.orderService.getOrdersByStageUrl('SHIPPING').subscribe(
+      (data) => {
+        this.OrdersDelivers = data;
+      },
+      (error) => {
+        console.error('Error fetching Orders Deliver : ', error);
+      }
+    );
+  }
+
+  getAllOrdersConfirm(){
+    this.orderService.getOrdersByStageUrl('CONFIRMATION').subscribe(
+      (data) => {
+        this.OrdersConfirms = data;
+      },
+      (error) => {
+        console.error('Error fetching Orders Confirm : ', error);
+      }
+    );
   }
 }
