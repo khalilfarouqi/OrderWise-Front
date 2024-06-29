@@ -1,7 +1,5 @@
-import { AfterViewInit, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../service/order.service';
-import { isPlatformBrowser } from '@angular/common';
-import Swiper from 'swiper';
 import { DashboardBean } from '../models/DashboardBean';
 
 @Component({
