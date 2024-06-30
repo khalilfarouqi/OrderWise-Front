@@ -19,7 +19,7 @@ export class StockListComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.role = 'SELLER';
+    this.role = 'CONFIRMED';
     if (this.role == 'SELLER')
       this.getStocksByUsernameUrl('khalil.farouqi');
     else if(this.role == 'ADMIN')

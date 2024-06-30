@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.role = 'SELLER';
+    this.role = 'CONFIRMED';
     if (this.role == 'SELLER')
       this.getProductsByUsernameUrl('khalil.farouqi');
     else if(this.role == 'ADMIN')

@@ -22,8 +22,8 @@ export class SideBarComponent implements AfterViewInit, OnInit {
     private router: Router) {}
 
   ngOnInit(): void {
-    //ADMIN, SELLER, DELIVERY_BOY, CONFIRMATION, NEW_USER
-    this.role = 'SELLER';
+    //ADMIN, SELLER, DELIVERY_BOY, CONFIRMED, NEW_USER
+    this.role = 'CONFIRMED';
   }
 
   ngAfterViewInit(): void {
