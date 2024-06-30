@@ -194,7 +194,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllOrdersConfirm(){
-    this.orderService.getOrdersByStageUrl('CONFIRMATION').subscribe(
+    this.orderService.getOrdersByStageUrl('CONFIRMED').subscribe(
       (data) => {
         this.OrdersConfirms = data;
       },
