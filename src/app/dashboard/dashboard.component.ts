@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../service/order.service';
 import { DashboardBean } from '../models/DashboardBean';
+import Swal from 'sweetalert2';
+import { ConfirmationDashboardStatsBean } from '../models/ConfirmationDashboardStatsBean';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +14,8 @@ export class DashboardComponent implements OnInit {
   period: string = 'monthly';
   isSidebarOpen = true;
   role!: string;
+  isActiveConfirmation!: string;
+  isActiveLivree!: string;
 
   updatedTimeOrdersToConfirm!: string;
   updatedTimeOrdersToDeliver!: string;
@@ -34,6 +38,22 @@ export class DashboardComponent implements OnInit {
     ordersToReturn: 0,
     dateOrdersToReturn: 0
   };
+  confirmDashStatsBean: ConfirmationDashboardStatsBean = {
+    orderTreated: 0,
+    orderTreatedThisDay: 0,
+    orderTreatedThisMonth: 0,
+    accountConfirmed: 0,
+    orderNotTreated: 0,
+    orderNotAnswerInConfirmation: 0,
+    orderRejectedInConfirmation: 0,
+    orderValidatedInConfirmation: 0,
+    ordersToConfirm: 0,
+    dateOrdersToConfirm: 0,
+    ordersToReturn: 0,
+    dateOrdersToReturn: 0,
+    accountToConfirm: 0,
+    dateAccountToConfirm: 0
+  };
   OrdersReturns: any[] = [];
   OrdersDelivers: any[] = [];
   OrdersConfirms: any[] = [];
@@ -42,21 +62,35 @@ export class DashboardComponent implements OnInit {
   constructor(private orderService :OrderService) { }
 
   ngOnInit(): void {
-    this.role == 'SELLER';
+    this.role = 'CONFIRMED';
+    this.isActiveConfirmation = 'active';
+    this.isActiveLivree = '';
     if (this.role == 'ADMIN') {
       this.getAllStatic();
       this.getAllOrdersReturn();
       this.getAllOrdersDeliver();
       this.getAllOrdersConfirm();
       this.getAllOrder();
-    } else {
+    } else if (this.role == 'SELLER') {
       this.getStatic('khalil.farouqi');
       this.getOrdersReturn('khalil.farouqi');
       this.getOrdersDeliver('khalil.farouqi');
       this.getOrdersConfirm('khalil.farouqi');
       this.getOrderAssignmentsBySellerUsername('khalil.farouqi');
+    } else if (this.role == 'DELIVERY_BOY') {
+      this.isActiveConfirmation = '';
+      this.isActiveLivree = 'active';
+      
+    } else if (this.role == 'CONFIRMED') {
+      this.getConfirmedStatic('khalil.farouqi');
+      this.getOrdersConfirmByConfirmed('khalil.farouqi');
+      this.getOrderTreatedByConfirmed('khalil.farouqi');
+    } else if (this.role == 'NEW_USER') {
+      this.showAlert('Your account is not validated', 'Validation Alert', 'info');
     }
-    this.updateTimeDisplay();
+    if (this.role != 'NEW_USER') {
+      this.updateTimeDisplay();
+    }
   }
 
   getStatic(username: string){
@@ -66,6 +100,17 @@ export class DashboardComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching DashState : ', error);
+      }
+    );
+  }
+
+  getConfirmedStatic(username: string){
+    this.orderService.getConfirmedDashStateUrl(username).subscribe(
+      (data) => {
+        this.confirmDashStatsBean = data;
+      },
+      (error) => {
+        console.error('Error fetching ConfirmedDashState : ', error);
       }
     );
   }
@@ -114,8 +159,30 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  getOrdersConfirmByConfirmed(username: string){
+    this.orderService.getOrdersConfirmByConfirmedUrl(username).subscribe(
+      (data) => {
+        this.OrdersConfirms = data;
+      },
+      (error) => {
+        console.error('Error fetching Orders Confirm : ', error);
+      }
+    );
+  }
+
   getOrderAssignmentsBySellerUsername(username: string){
     this.orderService.getOrderAssignmentsBySellerUsernameUrl(username).subscribe(
+      (data) => {
+        this.OrderAssignments = data;
+      },
+      (error) => {
+        console.error('Error fetching Order Assignments : ', error);
+      }
+    );
+  }
+
+  getOrderTreatedByConfirmed(username: string){
+    this.orderService.getConfirmedTreatedUrl(username).subscribe(
       (data) => {
         this.OrderAssignments = data;
       },
@@ -202,5 +269,14 @@ export class DashboardComponent implements OnInit {
         console.error('Error fetching Orders Confirm : ', error);
       }
     );
+  }
+
+  showAlert(title: string, text: string, icon: any) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      confirmButtonText: 'OK'
+    });
   }
 }

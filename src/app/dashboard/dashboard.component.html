@@ -1,8 +1,8 @@
 <app-side-bar (sidebarToggled)="onSidebarToggled($event)"></app-side-bar>
 <app-nav-bar></app-nav-bar>
 <div class="main-content" [class.main-content-open]="isSidebarOpen">
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid" *ngIf="role!='NEW_USER'">
+        <div class="row" *ngIf="role != 'CONFIRMED'">
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
                     <div class="card-header card-header-warning card-header-icon">
@@ -105,7 +105,97 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="role == 'CONFIRMED'">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="fas fa-sack-dollar"></i>
+                        </div>
+                        <p class="card-category">Order Treated</p>
+                        <h3 class="card-title">{{ confirmDashStatsBean.orderTreated }} <small>DH</small></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="fas fa-sack-dollar"></i>
+                        </div>
+                        <p class="card-category">Order Treated This day</p>
+                        <h3 class="card-title">{{ confirmDashStatsBean.orderTreatedThisDay }} <small>DH</small></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">cancel</i>
+                        </div>
+                        <p class="card-category">Order Treated This Month</p>
+                        <h3 class="card-title">{{ confirmDashStatsBean.orderTreatedThisMonth }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">cancel</i>
+                        </div>
+                        <p class="card-category">Account a Counfirmer</p>
+                        <h3 class="card-title">{{ confirmDashStatsBean.accountConfirmed}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">directions_bike</i>
+                        </div>
+                        <p class="card-category">Order Not Treated</p>
+                        <h3 class="card-title">{{ confirmDashStatsBean.orderNotTreated}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">warning</i>
+                        </div>
+                        <p class="card-category">Order not answer in Confirmation</p>
+                        <h3 class="card-title">{{ confirmDashStatsBean.orderNotAnswerInConfirmation}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">reply</i>
+                        </div>
+                        <p class="card-category">Order Rejected in Confirmation</p>
+                        <h3 class="card-title">{{ confirmDashStatsBean.orderRejectedInConfirmation}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">check</i>
+                        </div>
+                        <p class="card-category">Order Validated in Confirmation</p>
+                        <h3 class="card-title">{{ confirmDashStatsBean.orderValidatedInConfirmation}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="role != 'CONFIRMED'">
             <div class="col-md-4">
                 <div class="card card-chart">
                     <div class="card-body">
@@ -148,6 +238,49 @@
                 </div>
             </div>
         </div>
+        <div class="row" *ngIf="role == 'CONFIRMED'">
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-body">
+                        <h4 class="card-title">Commande a confirmée</h4>
+                        <p class="card-category">
+                            {{ confirmDashStatsBean.ordersToConfirm }} commandes ne sont pas encore confirmée.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated {{ updatedTimeOrdersToConfirm }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-body">
+                        <h4 class="card-title">Commande a Retourner</h4>
+                        <p class="card-category">{{ confirmDashStatsBean.ordersToReturn }} commandes ne sont pas encore confirmée a retourner.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated {{ updatedTimeOrdersToDeliver }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-body">
+                        <h4 class="card-title">Les accountes à Validées</h4>
+                        <p class="card-category">{{ confirmDashStatsBean.accountToConfirm }} compte ne sont pas encore validée.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated {{ updatedTimeOrdersToReturn }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-6 col-md-12">
                 <div class="card">
@@ -156,19 +289,19 @@
                             <div class="nav-tabs-wrapper">
                                 <span class="nav-tabs-title">Aperçu des commandes :</span>
                                 <ul class="nav nav-tabs" data-tabs="tabs">
-                                    <li class="nav-item">
-                                        <a mat-button class="nav-link active" href="#Confirmation" data-toggle="tab">
+                                    <li class="nav-item" *ngIf="role != 'DELIVERY_BOY'">
+                                        <a mat-button class="nav-link {{isActiveConfirmation}}" href="#Confirmation" data-toggle="tab">
                                             <i class="fas fa-check-circle order-confirmed-icon"></i> Confirmation
                                             <div class="ripple-container"></div>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a mat-button class="nav-link" href="#Livrée" data-toggle="tab">
+                                    <li class="nav-item" *ngIf="role != 'CONFIRMED'">
+                                        <a mat-button class="nav-link {{isActiveLivree}}" href="#Livrée" data-toggle="tab">
                                             <i class="fas fa-truck delivery-icon"></i> Livrée
                                             <div class="ripple-container"></div>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item" *ngIf="role != 'CONFIRMED'">
                                         <a mat-button class="nav-link" href="#Retourner" data-toggle="tab">
                                             <i class="fas fa-undo return-icon"></i> Retourner
                                             <div class="ripple-container"></div>
