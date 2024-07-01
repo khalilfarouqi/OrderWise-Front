@@ -52,6 +52,13 @@
       </a>
       <span class="tooltip">Analytics</span>
     </li>
+    <li *ngIf="role == 'CONFIRMED'" (click)="onButtonClick('profil', '/profil', $event)">
+      <a href="profile">
+        <i class='bx bx-user' ></i>
+        <span class="links_name">Profile</span>
+      </a>
+      <span class="tooltip">Profile</span>
+    </li>
     <li (click)="onButtonClick('Setting', '/setting', $event)">
       <a href="setting">
         <i class='bx bx-cog' ></i>
