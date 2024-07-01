@@ -31,11 +31,13 @@ import { SettingComponent } from './setting/setting.component';
 import { ProfilComponent } from './profil/profil.component';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ProductPageComponent } from './product-page/product-page.component';
+import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import { ProductPageComponent } from './product-page/product-page.component';
     AnalyticsComponent,
     SettingComponent,
     ProfilComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    ProfileDialogComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -75,6 +78,7 @@ import { ProductPageComponent } from './product-page/product-page.component';
     MatIconModule,
     MatTooltipModule,
     MatTableModule,
+    MatDialogModule,
     MatTabsModule
   ],
   providers: [
