@@ -19,6 +19,10 @@ export class UserService {
     return this.http.get<User>(this.apiUrl);
   }
 
+  getAllUsersToConfirmUrl(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/getAllToConfirm`);
+  }
+
   getProfile(username: string): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/profile/${username}`);
   }

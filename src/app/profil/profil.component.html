@@ -1,5 +1,38 @@
 <app-side-bar (sidebarToggled)="onSidebarToggled($event)"></app-side-bar>
 <app-nav-bar></app-nav-bar>
 <div class="main-content" [class.main-content-open]="isSidebarOpen">
-    <p>profil works!</p>
+    <div class="order-content">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">image</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Numero d’identité</th>
+                <th scope="col">Telephone</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let profile of profiles">
+                <td>{{ profile.image }}</td>
+                <td>{{ profile.firstname }}</td>
+                <td>{{ profile.lastname }}</td>
+                <td>{{ profile.username }}</td>
+                <td>{{ profile.email }}</td>
+                <td>{{ profile.cin }}</td>
+                <td>{{ profile.tel }}</td>
+                <td>{{ profile.city }}</td>
+                <td>{{ profile.gender }}</td>
+                <td>
+                  <button type="submit" class="btn btn-primary mb-2" (click)="openDialog(profile)">Afficher</button>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
