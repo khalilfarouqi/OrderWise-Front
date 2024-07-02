@@ -48,4 +48,16 @@ export class UserService {
       observe: 'events'
     });
   }
+
+  updateUserPopupForm(userForm: User): Observable<any> {
+    return this.http.put(this.apiUrl, userForm);
+  }
+
+  refuseUrl(userForm: User): Observable<any> {
+    return this.http.put(this.apiUrl + '/refuse', userForm);
+  }
+
+  valideUrl(userForm: User): Observable<any> {
+    return this.http.put(this.apiUrl + '/valide', userForm);
+  }
 }
