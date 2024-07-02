@@ -1,47 +1,49 @@
-<!-- profile-dialog.component.html -->
-<div class="modal-dialog modal-xl">
-    <h2>Profile Details</h2>
-    <div class="card-body">
-        <form>
-            <div class="form-group">
-                <label for="inputGender">Genre</label>
-                <select id="inputGender" class="form-control" formControlName="gender">
-                    <option value=""> profile.gender </option>
-                    <option>  gender.value  </option>
-                </select>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputFirstName">Prénom</label>
-                    <input type="text" class="form-control" id="inputFirstName" placeholder="Prénom" formControlName="firstname">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputLastName">Nom</label>
-                    <input type="text" class="form-control" id="inputLastName" placeholder="Nom" formControlName="lastname">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputCIN">CIN</label>
-                    <input type="text" class="form-control" id="inputCIN" placeholder="CIN" formControlName="cin">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputCity">Ville</label>
-                    <select id="inputCity" class="form-control" formControlName="city">
-                        <option value=""> profile.city </option>
-                        <option >  city.value  </option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputEmail4">Email</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" formControlName="email">
-            </div>
-            <div class="form-group">
-                <label for="inputTel">Téléphone</label>
-                <input type="text" class="form-control" id="inputTel" placeholder="Téléphone" formControlName="tel">
-            </div>
-            <button type="submit" class="btn btn-primary">Sauvegarder les modifications</button>                             
-        </form>
+<h1 mat-dialog-title>Profile Details</h1>
+<div mat-dialog-content>
+  <form>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" [(ngModel)]="profile.username" name="username" disabled>
     </div>
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" id="firstname" [(ngModel)]="profile.firstname" name="firstname">
+    </div>
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input type="text" class="form-control" id="lastname" [(ngModel)]="profile.lastname" name="lastname">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="profile.email" name="email">
+    </div>
+    <div class="form-group">
+      <label for="cin">Numero d’identité</label>
+      <input type="text" class="form-control" id="cin" [(ngModel)]="profile.cin" name="cin">
+    </div>
+    <div class="form-group">
+      <label for="tel">Telephone</label>
+      <input type="text" class="form-control" id="tel" [(ngModel)]="profile.tel" name="tel">
+    </div>
+    <div class="form-group">
+        <label for="city">Ville</label>
+        <select class="form-control" id="city" [(ngModel)]="profile.city" name="city">
+            <option selected>{{profile.city}}</option>
+            <option *ngFor="let city of cities" [value]="city.key">{{city.value}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="gender">Genre</label>
+        <select class="form-control" id="gender" [(ngModel)]="profile.gender" name="gender">
+            <option selected>{{profile.gender}}</option>
+            <option *ngFor="let gender of genders" [value]="gender.key">{{gender.value}}</option>
+        </select>
+      </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button type="button" class="btn btn-warning" (click)="onCancel()" style="margin: 10px;">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="onSave()" style="margin: 10px;">Save</button>
+  <button type="button" class="btn btn-success" (click)="onValide()" style="margin: 10px;">Validée</button>
+  <button type="button" class="btn btn-danger" (click)="onRefuser()" style="margin: 10px;">Refusée</button>
 </div>
