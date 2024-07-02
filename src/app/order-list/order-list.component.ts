@@ -30,7 +30,7 @@ export class OrderListComponent implements OnInit {
     else if(this.role == 'DELIVERY_BOY')
       this.getOrdersToDelivery(this.usenameDe);
     else if(this.role == 'CONFIRMED')
-      this.getOrdersToConfirmation('CONFIRMED');
+      this.getOrdersToConfirmation('CONFIRMATION');
   }
 
   getOrders(username: string) {

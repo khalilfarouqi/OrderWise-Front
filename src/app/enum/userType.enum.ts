@@ -3,5 +3,6 @@ export enum UserType {
     SELLER = 'Seller',
     DELIVERY_BOY = 'Delivery boy',
     CONFIRMED = 'Confirmateur',
-    NEW_USER = 'New user'
+    NEW_USER = 'New user',
+    REFUSER = 'Refusée'
 }

@@ -19,6 +19,10 @@ export class UserService {
     return this.http.get<User>(this.apiUrl);
   }
 
+  getAllUsersToConfirmUrl(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/getAllToConfirm`);
+  }
+
   getProfile(username: string): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/profile/${username}`);
   }
@@ -43,5 +47,17 @@ export class UserService {
       reportProgress: true,
       observe: 'events'
     });
+  }
+
+  updateUserPopupForm(userForm: User): Observable<any> {
+    return this.http.put(this.apiUrl, userForm);
+  }
+
+  refuseUrl(userForm: User): Observable<any> {
+    return this.http.put(this.apiUrl + '/refuse', userForm);
+  }
+
+  valideUrl(userForm: User): Observable<any> {
+    return this.http.put(this.apiUrl + '/valide', userForm);
   }
 }
