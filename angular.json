@@ -40,7 +40,6 @@
               }
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css",
@@ -116,7 +115,6 @@
               }
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css",
