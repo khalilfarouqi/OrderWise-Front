@@ -1,8 +1,8 @@
 export enum UserType {
     ADMIN = 'Admin',
-    SELLER = 'Seller',
+    SELLER = 'SELLER',
     DELIVERY_BOY = 'Delivery boy',
     CONFIRMED = 'Confirmateur',
     NEW_USER = 'New user',
-    REFUSER = 'Refusée'
+    REFUSER = 'REFUSER'
 }

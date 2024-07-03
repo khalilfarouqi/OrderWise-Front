@@ -30,7 +30,13 @@
     background-color: #f9f9f9;
     border-radius: 8px;
   }
-
-
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
   
   
