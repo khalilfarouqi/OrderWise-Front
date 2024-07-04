@@ -1,7 +1,7 @@
 export interface DeliveryBoyDashStatsBean {
     walletToday: number;
-    oneyDepose: number;
-    oneyPacket: number;
+    moneyDepose: number;
+    moneyPacket: number;
     orderTreatedToday: number;
     orderNoTreatedToday: number;
     orderNotTreated: number;
