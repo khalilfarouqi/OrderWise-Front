@@ -2,7 +2,7 @@
 <app-nav-bar></app-nav-bar>
 <div class="main-content" [class.main-content-open]="isSidebarOpen">
     <div class="container-fluid" *ngIf="role!='NEW_USER'">
-        <div class="row" *ngIf="role != 'CONFIRMED'">
+        <div class="row" *ngIf="role != 'CONFIRMED' && role != 'DELIVERY_BOY'">
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
                     <div class="card-header card-header-warning card-header-icon">
@@ -195,7 +195,110 @@
                 </div>
             </div>
         </div>
-        <div class="row" *ngIf="role != 'CONFIRMED'">
+        <div class="row" *ngIf="role == 'DELIVERY_BOY'">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <p class="card-category">Portefeuille Aujourd'hui</p>
+                        <h3 class="card-title">{{ deliveryBoyDashStatsBean.walletToday }} <small>DH</small></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <mat-tab-group>
+                        <mat-tab label="This Month">
+                            <div class="card-header card-header-success card-header-icon">
+                                <div class="card-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <p class="card-category">Argent Déposé</p>
+                                <h3 class="card-title">{{deliveryBoyDashStatsBean.moneyDepose}}</h3>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Today">
+                            <div class="card-header card-header-info card-header-icon">
+                                <div class="card-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <p class="card-category">Argent Enveloppe</p>
+                                <h3 class="card-title">{{deliveryBoyDashStatsBean.moneyPacket}}</h3>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <p class="card-category">Commande Traité Aujourd'hui</p>
+                        <h3 class="card-title">{{deliveryBoyDashStatsBean.orderTreatedToday}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <p class="card-category">Commande Non Traité Aujourd'hui</p>
+                        <h3 class="card-title">{{deliveryBoyDashStatsBean.orderNoTreatedToday}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <p class="card-category">Commande Non Traité</p>
+                        <h3 class="card-title">{{deliveryBoyDashStatsBean.orderNotTreated}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <p class="card-category">Commande Livrée</p>
+                        <h3 class="card-title">{{deliveryBoyDashStatsBean.orderLivrer}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <p class="card-category">Commande Annulée</p>
+                        <h3 class="card-title">{{deliveryBoyDashStatsBean.orderAnnuler}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <p class="card-category">Commande Pas de Réponse</p>
+                        <h3 class="card-title">{{deliveryBoyDashStatsBean.orderNotResponse}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="role != 'CONFIRMED' && role != 'DELIVERY_BOY'">
             <div class="col-md-4">
                 <div class="card card-chart">
                     <div class="card-body">
@@ -276,6 +379,49 @@
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons">access_time</i> updated {{ updatedTimeOrdersToReturn }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="role == 'DELIVERY_BOY'">
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-body">
+                        <h4 class="card-title">Commandes a traité</h4>
+                        <p class="card-category">
+                            {{ deliveryBoyDashStatsBean.orderToTraite }} commandes ne sont pas encore traité.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated {{ deliveryBoyDashStatsBean.dateOrderToTraite }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-body">
+                        <h4 class="card-title">Commandes a livrée</h4>
+                        <p class="card-category">{{ deliveryBoyDashStatsBean.orderToDeliver }} commandes ne sont pas encore livrée.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated {{ deliveryBoyDashStatsBean.dateOrderToDeliver }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-body">
+                        <h4 class="card-title">Commandes à retourner</h4>
+                        <p class="card-category">{{ deliveryBoyDashStatsBean.orderToReturn }} commandes ne sont pas encore confirmée a retourner.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated {{ deliveryBoyDashStatsBean.dateOrderToReturn }}
                         </div>
                     </div>
                 </div>
