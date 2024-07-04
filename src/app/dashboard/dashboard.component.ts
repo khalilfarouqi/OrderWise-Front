@@ -57,8 +57,8 @@ export class DashboardComponent implements OnInit {
   };
   deliveryBoyDashStatsBean: DeliveryBoyDashStatsBean = {
     walletToday: 0,
-    oneyDepose: 0,
-    oneyPacket: 0,
+    moneyDepose: 0,
+    moneyPacket: 0,
     orderTreatedToday: 0,
     orderNoTreatedToday: 0,
     orderNotTreated: 0,
@@ -101,7 +101,7 @@ export class DashboardComponent implements OnInit {
       this.getDeliveryBoyDashState('khalil.farouqi');
       this.getOrdersReturnedByDeliveryBoy('khalil.farouqi');
       this.getOrdersDeliveredByDeliveryBoy('khalil.farouqi');
-      this.getOrderAssignmentsBySellerUsername('khalil.farouqi');
+      this.getDeliveryBoyTreated('khalil.farouqi');
       
     } else if (this.role == 'CONFIRMED') {
       this.getConfirmedStatic('khalil.farouqi');
