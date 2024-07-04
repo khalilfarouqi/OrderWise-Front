@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { DashboardBean } from '../models/DashboardBean';
 import { ConfirmationDashboardStatsBean } from '../models/ConfirmationDashboardStatsBean';
 import { ConfirmedTreatedBean } from '../models/ConfirmedTreatedBean';
+import { DeliveryBoyDashStatsBean } from '../models/DeliveryBoyDashStatsBean';
 
 @Injectable({
   providedIn: 'root'
@@ -72,5 +73,21 @@ export class OrderService {
 
   getConfirmedTreatedUrl(username: string): Observable<ConfirmedTreatedBean[]> {
     return this.http.get<ConfirmedTreatedBean[]>(`${this.apiUrl}/confirmed-treated/${username}`);
+  }
+
+  getDeliveryBoyDashStateUrl(username: string): Observable<DeliveryBoyDashStatsBean> {
+    return this.http.get<DeliveryBoyDashStatsBean>(`${this.apiUrl}/delivery-boy-dashboard-state/${username}`);
+  }
+
+  getOrdersReturnedByDeliveryBoyUrl(username: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/returned-by-delivery-boy/${username}`);//
+  }
+
+  getOrdersDeliveredByDeliveryBoyUrl(username: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/delivered-by-delivery-boy/${username}`);//
+  }
+
+  getDeliveryBoyTreatedUrl(username: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/delivery-boy-treated/${username}`);//
   }
 }
