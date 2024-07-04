@@ -3,6 +3,7 @@ import { OrderService } from '../service/order.service';
 import { DashboardBean } from '../models/DashboardBean';
 import Swal from 'sweetalert2';
 import { ConfirmationDashboardStatsBean } from '../models/ConfirmationDashboardStatsBean';
+import { DeliveryBoyDashStatsBean } from '../models/DeliveryBoyDashStatsBean';
 
 @Component({
   selector: 'app-dashboard',
@@ -54,6 +55,23 @@ export class DashboardComponent implements OnInit {
     accountToConfirm: 0,
     dateAccountToConfirm: 0
   };
+  deliveryBoyDashStatsBean: DeliveryBoyDashStatsBean = {
+    walletToday: 0,
+    oneyDepose: 0,
+    oneyPacket: 0,
+    orderTreatedToday: 0,
+    orderNoTreatedToday: 0,
+    orderNotTreated: 0,
+    orderLivrer: 0,
+    orderAnnuler: 0,
+    orderNotResponse: 0,
+    orderToTraite: 0,
+    dateOrderToTraite: 0,
+    orderToDeliver: 0,
+    dateOrderToDeliver: 0,
+    orderToReturn: 0,
+    dateOrderToReturn: 0
+  }
   OrdersReturns: any[] = [];
   OrdersDelivers: any[] = [];
   OrdersConfirms: any[] = [];
@@ -62,7 +80,7 @@ export class DashboardComponent implements OnInit {
   constructor(private orderService :OrderService) { }
 
   ngOnInit(): void {
-    this.role = 'CONFIRMED';
+    this.role = 'DELIVERY_BOY';
     this.isActiveConfirmation = 'active';
     this.isActiveLivree = '';
     if (this.role == 'ADMIN') {
@@ -80,11 +98,15 @@ export class DashboardComponent implements OnInit {
     } else if (this.role == 'DELIVERY_BOY') {
       this.isActiveConfirmation = '';
       this.isActiveLivree = 'active';
+      this.getDeliveryBoyDashState('khalil.farouqi');
+      this.getOrdersReturnedByDeliveryBoy('khalil.farouqi');
+      this.getOrdersDeliveredByDeliveryBoy('khalil.farouqi');
+      this.getOrderAssignmentsBySellerUsername('khalil.farouqi');
       
     } else if (this.role == 'CONFIRMED') {
       this.getConfirmedStatic('khalil.farouqi');
       this.getOrdersConfirmByConfirmed('khalil.farouqi');
-      this.getOrderTreatedByConfirmed('khalil.farouqi');
+      this.getDeliveryBoyTreated('khalil.farouqi');
     } else if (this.role == 'NEW_USER') {
       this.showAlert('Your account is not validated', 'Validation Alert', 'info');
     }
@@ -97,6 +119,17 @@ export class DashboardComponent implements OnInit {
     this.orderService.getDashStateUrl(username).subscribe(
       (data) => {
         this.dashState = data;
+      },
+      (error) => {
+        console.error('Error fetching DashState : ', error);
+      }
+    );
+  }
+
+  getDeliveryBoyDashState(username: string){
+    this.orderService.getDeliveryBoyDashStateUrl(username).subscribe(
+      (data) => {
+        this.deliveryBoyDashStatsBean = data;
       },
       (error) => {
         console.error('Error fetching DashState : ', error);
@@ -172,6 +205,17 @@ export class DashboardComponent implements OnInit {
 
   getOrderAssignmentsBySellerUsername(username: string){
     this.orderService.getOrderAssignmentsBySellerUsernameUrl(username).subscribe(
+      (data) => {
+        this.OrderAssignments = data;
+      },
+      (error) => {
+        console.error('Error fetching Order Assignments : ', error);
+      }
+    );
+  }
+
+  getDeliveryBoyTreated(username: string){
+    this.orderService.getDeliveryBoyTreatedUrl(username).subscribe(
       (data) => {
         this.OrderAssignments = data;
       },
@@ -267,6 +311,28 @@ export class DashboardComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching Orders Confirm : ', error);
+      }
+    );
+  }
+
+  getOrdersDeliveredByDeliveryBoy(username: string){
+    this.orderService.getOrdersDeliveredByDeliveryBoyUrl(username).subscribe(
+      (data) => {
+        this.OrderAssignments = data;
+      },
+      (error) => {
+        console.error('Error fetching Order Assignments : ', error);
+      }
+    );
+  }
+
+  getOrdersReturnedByDeliveryBoy(username: string){
+    this.orderService.getOrdersReturnedByDeliveryBoyUrl(username).subscribe(
+      (data) => {
+        this.OrderAssignments = data;
+      },
+      (error) => {
+        console.error('Error fetching Order Assignments : ', error);
       }
     );
   }
