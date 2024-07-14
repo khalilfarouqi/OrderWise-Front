@@ -15,23 +15,26 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import { SettingComponent } from './setting/setting.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ProductPageComponent } from './product-page/product-page.component';
+import { AppComponent } from './app.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
+  //{ path: '', component: AppComponent},
   { path: "login", component: LoginComponent},
   { path: "signup", component: SignUpComponent},
   { path: "home", component: HomeComponent},
   { path: "tarif", component: TarifPageComponent},
   { path: "service", component: ServicePageComponent},
   { path: "contact", component: ContactUsPageComponent},
-  { path: "dashboard", component: DashboardComponent},
-  { path: "notification", component: NotificationListComponent},
-  { path: "order", component: OrderListComponent},
-  { path: "product", component: ProductListComponent},
-  { path: "stock", component: StockListComponent},
-  { path: "analytics", component: AnalyticsComponent},
-  { path: "setting", component: SettingComponent},
-  { path: "profil", component: ProfilComponent},
-  { path: "product-page/:id", component: ProductPageComponent}
+  { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: "notification", component: NotificationListComponent, canActivate: [AuthGuard]},
+  { path: "order", component: OrderListComponent, canActivate: [AuthGuard]},
+  { path: "product", component: ProductListComponent, canActivate: [AuthGuard]},
+  { path: "stock", component: StockListComponent, canActivate: [AuthGuard]},
+  { path: "analytics", component: AnalyticsComponent, canActivate: [AuthGuard]},
+  { path: "setting", component: SettingComponent, canActivate: [AuthGuard]},
+  { path: "profil", component: ProfilComponent, canActivate: [AuthGuard]},
+  { path: "product-page/:id", component: ProductPageComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

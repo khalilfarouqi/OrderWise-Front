@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -38,6 +38,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
+
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { initializeKeycloak } from './keycloak-init';
 
 @NgModule({
   declarations: [
@@ -79,11 +82,18 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
     MatTooltipModule,
     MatTableModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    KeycloakAngularModule
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    }
   ],
   bootstrap: [AppComponent]
 })
