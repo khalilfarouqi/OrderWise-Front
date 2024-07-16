@@ -38,6 +38,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,11 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
     MatTooltipModule,
     MatTableModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatIconModule,
+    MatFormFieldModule
   ],
   providers: [
     provideClientHydration(),
