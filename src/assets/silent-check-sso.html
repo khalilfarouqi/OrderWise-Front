@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Silent SSO Check</title>
+    <script>
+        window.onload = function () {
+            try {
+                const message = 'keycloak-silent-check-sso';
+                if (window.opener) {
+                    window.opener.postMessage(message, window.location.origin);
+                } else if (window.parent) {
+                    window.parent.postMessage(message, window.location.origin);
+                }
+            } catch (error) {
+                console.error('Error in silent SSO check:', error);
+            }
+        };
+
+        window.addEventListener('message', (event) => {
+            console.log('Message received in silent-check-sso.html:', event);
+            if (event.origin !== window.location.origin) {
+                console.error('Origin mismatch:', event.origin, window.location.origin);
+                return;
+            }
+
+            try {
+                // Ensure that the data being processed is as expected
+                console.log('Event data:', event.data);
+            } catch (error) {
+                console.error('Error processing event data:', error);
+            }
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
