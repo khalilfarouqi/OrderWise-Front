@@ -34,7 +34,8 @@ const routes: Routes = [
   { path: "analytics", component: AnalyticsComponent, canActivate: [AuthGuard]},
   { path: "setting", component: SettingComponent, canActivate: [AuthGuard]},
   { path: "profil", component: ProfilComponent, canActivate: [AuthGuard]},
-  { path: "product-page/:id", component: ProductPageComponent, canActivate: [AuthGuard]}
+  { path: "product-page/:id", component: ProductPageComponent, canActivate: [AuthGuard]},
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({
