@@ -4,6 +4,7 @@ import { DashboardBean } from '../models/DashboardBean';
 import Swal from 'sweetalert2';
 import { ConfirmationDashboardStatsBean } from '../models/ConfirmationDashboardStatsBean';
 import { DeliveryBoyDashStatsBean } from '../models/DeliveryBoyDashStatsBean';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +15,11 @@ export class DashboardComponent implements OnInit {
 
   period: string = 'monthly';
   isSidebarOpen = true;
-  role!: string;
   isActiveConfirmation!: string;
   isActiveLivree!: string;
+
+  username!: string;
+  role!: string;
 
   updatedTimeOrdersToConfirm!: string;
   updatedTimeOrdersToDeliver!: string;
@@ -77,12 +80,22 @@ export class DashboardComponent implements OnInit {
   OrdersConfirms: any[] = [];
   OrderAssignments: any[] = [];
 
-  constructor(private orderService :OrderService) { }
+  constructor(private orderService :OrderService,
+    private authService: AuthService) {
+      this.authService.isLoggedIn().then(loggedIn => {
+        if (loggedIn) {
+          this.username = this.authService.getUsername();
+          this.role = this.authService.getUserRole();
+        } else {
+          this.authService.login();
+        }
+      });
+     }
 
   ngOnInit(): void {
-    this.role = 'DELIVERY_BOY';
     this.isActiveConfirmation = 'active';
     this.isActiveLivree = '';
+    
     if (this.role == 'ADMIN') {
       this.getAllStatic();
       this.getAllOrdersReturn();
@@ -90,23 +103,23 @@ export class DashboardComponent implements OnInit {
       this.getAllOrdersConfirm();
       this.getAllOrder();
     } else if (this.role == 'SELLER') {
-      this.getStatic('khalil.farouqi');
-      this.getOrdersReturn('khalil.farouqi');
-      this.getOrdersDeliver('khalil.farouqi');
-      this.getOrdersConfirm('khalil.farouqi');
-      this.getOrderAssignmentsBySellerUsername('khalil.farouqi');
+      this.getStatic(this.username);
+      this.getOrdersReturn(this.username);
+      this.getOrdersDeliver(this.username);
+      this.getOrdersConfirm(this.username);
+      this.getOrderAssignmentsBySellerUsername(this.username);
     } else if (this.role == 'DELIVERY_BOY') {
       this.isActiveConfirmation = '';
       this.isActiveLivree = 'active';
-      this.getDeliveryBoyDashState('khalil.farouqi');
-      this.getOrdersReturnedByDeliveryBoy('khalil.farouqi');
-      this.getOrdersDeliveredByDeliveryBoy('khalil.farouqi');
-      this.getDeliveryBoyTreated('khalil.farouqi');
+      this.getDeliveryBoyDashState(this.username);
+      this.getOrdersReturnedByDeliveryBoy(this.username);
+      this.getOrdersDeliveredByDeliveryBoy(this.username);
+      this.getDeliveryBoyTreated(this.username);
       
     } else if (this.role == 'CONFIRMED') {
-      this.getConfirmedStatic('khalil.farouqi');
-      this.getOrdersConfirmByConfirmed('khalil.farouqi');
-      this.getDeliveryBoyTreated('khalil.farouqi');
+      this.getConfirmedStatic(this.username);
+      this.getOrdersConfirmByConfirmed(this.username);
+      this.getDeliveryBoyTreated(this.username);
     } else if (this.role == 'NEW_USER') {
       this.showAlert('Your account is not validated', 'Validation Alert', 'info');
     }

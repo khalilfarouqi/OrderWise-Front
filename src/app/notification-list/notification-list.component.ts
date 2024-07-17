@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../service/notification.service';
 import Swal from 'sweetalert2';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-notification-list',
@@ -11,14 +12,27 @@ export class NotificationListComponent implements OnInit {
   notifications: any[] = [];
   isSidebarOpen = true;
 
-  constructor(private notificationService: NotificationService) { }
+  role!: string;
+  username!: string;
+
+  constructor(private notificationService: NotificationService,
+    private authService: AuthService) { 
+    this.authService.isLoggedIn().then(loggedIn => {
+      if (loggedIn) {
+        this.username = this.authService.getUsername();
+        this.role = this.authService.getUserRole();
+      } else {
+        this.authService.login();
+      }
+    });
+  }
 
   onSidebarToggled(isOpen: boolean) {
     this.isSidebarOpen = isOpen;
   }
   
   ngOnInit(): void {
-    this.getNotification('khalil.farouqi');
+    this.getNotification(this.username);
   }
   
   removeNotification(index: number, notificationId: number): void {

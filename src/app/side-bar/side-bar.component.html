@@ -70,11 +70,12 @@
       <div class="profile-details">
         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="profileImg">
         <div class="name_job">
-          <div class="name">Prem Shahi</div>
-          <div class="job">Web designer</div>
+          <div class="name">{{ fullName }}</div>
+          <div class="job">{{ role }}</div>
         </div>
       </div>
       <i class='bx bx-log-out' id="log_out"></i>
+      <a (click)="logout()" id="log_out"><i class='bx bx-log-out'></i></a>
     </li>
   </ul>
 </div>

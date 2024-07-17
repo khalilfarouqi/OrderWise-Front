@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../service/product.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-product-list',
@@ -10,18 +11,30 @@ import { Router } from '@angular/router';
 export class ProductListComponent implements OnInit {
   products: any[] = [];
   isSidebarOpen = true;
-  role!: string;
 
-  constructor(private productService: ProductService, private router: Router) { }
+  role!: string;
+  username!: string;
+
+  constructor(private productService: ProductService, 
+    private router: Router,
+    private authService: AuthService) { 
+    this.authService.isLoggedIn().then(loggedIn => {
+      if (loggedIn) {
+        this.username = this.authService.getUsername();
+        this.role = this.authService.getUserRole();
+      } else {
+        this.authService.login();
+      }
+    });
+  }
 
   onSidebarToggled(isOpen: boolean) {
     this.isSidebarOpen = isOpen;
   }
 
   ngOnInit(): void {
-    this.role = 'CONFIRMED';
     if (this.role == 'SELLER')
-      this.getProductsByUsernameUrl('khalil.farouqi');
+      this.getProductsByUsernameUrl(this.username);
     else if(this.role == 'ADMIN')
       this.getAllProducts();
   }
