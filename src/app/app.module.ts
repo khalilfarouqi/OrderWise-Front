@@ -85,7 +85,7 @@ import { initializeKeycloak } from './keycloak-init';
     MatTableModule,
     MatDialogModule,
     MatTabsModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
     MatPaginatorModule,
     MatIconModule,
     MatIconModule,
