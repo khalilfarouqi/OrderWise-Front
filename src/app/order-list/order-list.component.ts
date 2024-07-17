@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../service/order.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-order-list',
@@ -10,19 +11,28 @@ import { Router } from '@angular/router';
 export class OrderListComponent implements OnInit {
   orders: any[] = [];
   isSidebarOpen = true;
+
   role!: string;
   usenameDe!: string;
 
-  constructor(private orderService: OrderService, private router: Router) { }
+  constructor(private orderService: OrderService, 
+    private router: Router,
+    private authService: AuthService) { 
+    this.authService.isLoggedIn().then(loggedIn => {
+      if (loggedIn) {
+        this.usenameDe = this.authService.getUsername();
+        this.role = this.authService.getUserRole();
+      } else {
+        this.authService.login();
+      }
+    });
+  }
 
   onSidebarToggled(isOpen: boolean) {
     this.isSidebarOpen = isOpen;
   }
   
   ngOnInit(): void {
-    this.role = 'CONFIRMED';
-    this.usenameDe = 'khalil.farouqi';
-
     if (this.role == 'SELLER')
       this.getOrders(this.usenameDe);
     else if(this.role == 'ADMIN')

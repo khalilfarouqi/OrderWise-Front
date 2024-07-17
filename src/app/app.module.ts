@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -41,6 +41,9 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { initializeKeycloak } from './keycloak-init';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +85,7 @@ import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-
     MatTableModule,
     MatDialogModule,
     MatTabsModule,
+    KeycloakAngularModule,
     MatPaginatorModule,
     MatIconModule,
     MatIconModule,
@@ -89,7 +93,13 @@ import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    }
   ],
   bootstrap: [AppComponent]
 })

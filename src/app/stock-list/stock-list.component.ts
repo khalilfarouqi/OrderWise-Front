@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StockService } from '../service/stock.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-stock-list',
@@ -10,18 +11,30 @@ import { Router } from '@angular/router';
 export class StockListComponent implements OnInit {
   stocks: any[] = [];
   isSidebarOpen = true;
-  role!: string; 
 
-  constructor(private stockService: StockService, private router: Router) { }
+  role!: string;
+  username!: string;
+
+  constructor(private stockService: StockService, 
+    private router: Router,
+    private authService: AuthService) {
+      this.authService.isLoggedIn().then(loggedIn => {
+        if (loggedIn) {
+          this.username = this.authService.getUsername();
+          this.role = this.authService.getUserRole();
+        } else {
+          this.authService.login();
+        }
+      });
+    }
 
   onSidebarToggled(isOpen: boolean) {
     this.isSidebarOpen = isOpen;
   }
   
   ngOnInit(): void {
-    this.role = 'CONFIRMED';
     if (this.role == 'SELLER')
-      this.getStocksByUsernameUrl('khalil.farouqi');
+      this.getStocksByUsernameUrl(this.username);
     else if(this.role == 'ADMIN')
       this.getAllStocks();
   }

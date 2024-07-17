@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild, Renderer2, Output, EventEmitter, OnInit } from '@angular/core';
 import { SidebarService } from '../service/sidebar.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -15,15 +16,27 @@ export class SideBarComponent implements AfterViewInit, OnInit {
   @Output() sidebarToggled = new EventEmitter<boolean>();
 
   isOpen = true;
-  role!: string; 
+  role!: string;
+
+  username!: string;
+  fullName!: string;
 
   constructor(private renderer: Renderer2, 
     private sidebarService: SidebarService, 
-    private router: Router) {}
+    private router: Router,
+    private authService: AuthService) {
+      this.authService.isLoggedIn().then(loggedIn => {
+        if (loggedIn) {
+          this.username = this.authService.getUsername();
+          this.fullName = this.authService.getFullname();
+          this.role = this.authService.getUserRole();
+        } else {
+          this.authService.login();
+        }
+      });
+    }
 
   ngOnInit(): void {
-    //ADMIN, SELLER, DELIVERY_BOY, CONFIRMED, NEW_USER
-    this.role = 'CONFIRMED';
   }
 
   ngAfterViewInit(): void {
@@ -63,5 +76,10 @@ export class SideBarComponent implements AfterViewInit, OnInit {
     event.preventDefault();
     this.sidebarService.selectButton(button);
     this.router.navigate([route]);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/home']);
   }
 }

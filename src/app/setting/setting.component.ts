@@ -13,6 +13,7 @@ import { MyMoney } from '../models/MyMoney';
 import Swal from 'sweetalert2';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { UploadFileService } from '../service/upload-file.service';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-setting',
@@ -58,6 +59,9 @@ export class SettingComponent implements OnInit {
   cityEntries: { key: string, value: string }[] = [];
   genderEntries: { key: string, value: string }[] = [];
 
+  role!: string;
+  username!: string;
+
   initializeEnum() {
     this.cityEntries = Object.entries(City).map(([key, value]) => ({ key, value }));
     this.genderEntries = Object.entries(Gender).map(([key, value]) => ({ key, value }));
@@ -68,7 +72,8 @@ export class SettingComponent implements OnInit {
     private fb: FormBuilder,
     private walletService: WalletService,
     private myMoneyService: MyMoneyService,
-    private uploadFileService: UploadFileService) { 
+    private uploadFileService: UploadFileService,
+    private authService: AuthService) { 
       const defaultUser: User = {
         id: 0, 
         username: '', 
@@ -93,11 +98,19 @@ export class SettingComponent implements OnInit {
         user: defaultUser,
         seller: defaultUser
       };
+      this.authService.isLoggedIn().then(loggedIn => {
+        if (loggedIn) {
+          this.username = this.authService.getUsername();
+          this.role = this.authService.getUserRole();
+        } else {
+          this.authService.login();
+        }
+      });
   }
 
   ngOnInit(): void {
-    this.getProfile('khalil.farouqi');
-    this.getWallatByUsername('khalil.farouqi');
+    this.getProfile(this.username);
+    this.getWallatByUsername(this.username);
     this.userForm = new FormGroup({
       username: new FormControl('', Validators.required),
       image: new FormControl('', Validators.required)
@@ -198,7 +211,7 @@ export class SettingComponent implements OnInit {
     const data: MyMoney = {
       montant: this.myMoneyForm.value.montant,
       user: {
-        username: 'khalil.farouqi'
+        username: this.username
       }
     };
     this.myMoneyService.postMyMoney(data).subscribe({
@@ -213,7 +226,7 @@ export class SettingComponent implements OnInit {
   }
 
   submitUserInfoForm(): void {
-    this.userInfoForm.value.username = 'khalil.farouqi';
+    this.userInfoForm.value.username = this.username;
     this.userService.updateUserForm(this.userInfoForm.value).subscribe({
       next: (response) => {
         this.showAlert('Update successful', '', 'success');
@@ -225,7 +238,7 @@ export class SettingComponent implements OnInit {
   }
 
   submitPasswordForm(): void {
-    this.passwordForm.value.username = 'khalil.farouqi';
+    this.passwordForm.value.username = this.username;
     this.userService.updatePassword(this.passwordForm.value).subscribe({
       next: (response) => {
         this.message = 'Password changed successfully!';
