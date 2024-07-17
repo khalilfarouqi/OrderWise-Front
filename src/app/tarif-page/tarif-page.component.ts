@@ -1,20 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { DestinationsService } from '../service/destinations.service';
-import { map } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-tarif-page',
   templateUrl: './tarif-page.component.html',
-  styleUrl: './tarif-page.component.css'
+  styleUrls: ['./tarif-page.component.css']
 })
-export class TarifPageComponent implements OnInit {
-  destinations: any[] = [];
+export class TarifPageComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['city', 'shippingCost', 'deliveryDays'];
+  dataSource = new MatTableDataSource<any>();
   searchQuery: string = '';
-  filteredDestinations: any[] = [];
-
-  pageSize: number = 10;
-  currentPage: number = 1;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private destinationsService: DestinationsService) { }
 
@@ -22,23 +20,22 @@ export class TarifPageComponent implements OnInit {
     this.getDestinations();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   getDestinations() {
     this.destinationsService.getDestinationsUrl().subscribe(
       (data) => {
-        this.destinations = data;
-        this.filteredDestinations = data; 
+        this.dataSource.data = data;
       },
       (error) => {
         console.error('Error fetching destinations:', error);
       }
     );
   }
-  
-  filterData() {
-    this.currentPage = 1; // Reset to first page when filtering
-    this.filteredDestinations = this.destinations.filter(destination =>
-      destination.city.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
-  }
 
+  filterData() {
+    this.dataSource.filter = this.searchQuery.trim().toLowerCase();
+  }
 }

@@ -38,6 +38,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './keycloak-init';
@@ -84,6 +86,10 @@ import { initializeKeycloak } from './keycloak-init';
     MatDialogModule,
     MatTabsModule,
     KeycloakAngularModule
+    MatPaginatorModule,
+    MatIconModule,
+    MatIconModule,
+    MatFormFieldModule
   ],
   providers: [
     provideClientHydration(),

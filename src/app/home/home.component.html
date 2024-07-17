@@ -1,36 +1,96 @@
 <app-contact-bar></app-contact-bar>
 <app-nav-bar-home></app-nav-bar-home>
-<div class="tracking-container">
+
+<main>
+  <section class="tracking-container">
     <h2>Suivez votre commande</h2>
     <form (ngSubmit)="submitTrackingCode()">
-      <input type="text" name="trackingCode" placeholder="Entrez votre code de suivi" required>
+      <input type="number" name="trackingCode" placeholder="Entrez votre code de suivi" required>
       <button type="submit">Suivre</button>
     </form>
-</div>
+  </section>
 
-<div class="about-us-container">
+  <section class="about-us-container">
     <h2>Qui sommes-nous</h2>
     <p>
-      The Order Management System is a backend web application designed to streamline the management of orders for e-commerce businesses. Whether handling a few orders or a large volume of transactions, this system provides a robust platform to efficiently manage and track orders from placement to delivery.
+      Swift Abrid est la solution d'expédition qui vous aidera à livrer vos colis et vous donnera également une plate-forme avancée pour gérer facilement votre entreprise, avec Swift Abrid tout est facile.
     </p>
-</div>
+    <div class="about-us-stats">
+      <div class="stat">
+        <img src="https://cdn-icons-png.flaticon.com/512/4396/4396937.png" alt="Colis livrés" />
+        <h3>+5000</h3>
+        <p>Colis livrés</p>
+      </div>
+      <div class="stat">
+        <img src="https://swiftabrid.ma/assets/images/achievements/support-cities.png" alt="Villes couvertes" />
+        <h3>+50</h3>
+        <p>Villes couvertes</p>
+      </div>
+      <div class="stat">
+        <img src="https://cdn-icons-png.flaticon.com/512/411/411712.png" alt="Taux de livraison" />
+        <h3>70%</h3>
+        <p>Taux de livraison</p>
+      </div>
+    </div>
+  </section>
 
-<div class="process-container">
+  <section class="process-container">
     <h2>Votre processus de travail</h2>
-    <p>
-      Our process is designed to ensure that orders are managed efficiently and effectively. From the moment an order is placed, our system tracks its progress through various stages: processing, shipping, and delivery. We provide real-time updates and ensure that any issues are quickly addressed to maintain customer satisfaction.
-    </p>
-</div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="icon-container"><i class="fas fa-user-plus"></i></div>
+        <h3>Créez votre compte</h3>
+        <p>Vous pouvez créer facilement votre compte puis vous serez contacté en moins de 24 heures pour confirmer votre compte.</p>
+      </div>
+      <div class="process-step">
+        <div class="icon-container"><i class="fas fa-box"></i></div>
+        <h3>Envoyez votre stock</h3>
+        <p>Envoyez votre stock si vous le souhaitez, nous pouvons ramasser vos commandes tous les jours.</p>
+      </div>
+      <div class="process-step">
+        <div class="icon-container"><i class="fas fa-store"></i></div>
+        <h3>Intégrez vos magasins</h3>
+        <p>Intégrez vos magasins (Shopify, WooCommerce) avec notre plateforme et suivez l'état de vos commandes.</p>
+      </div>
+      <div class="process-step">
+        <div class="icon-container"><i class="fas fa-tasks"></i></div>
+        <h3>Suivez votre entreprise</h3>
+        <p>Suivez vos commandes à l'aide de notre plateforme.</p>
+      </div>
+    </div>
+  </section>  
 
-<div class="advantages-container">
+  <section class="advantages-container">
     <h2>Les avantages de choisir OrderWise</h2>
-    <ul>
-      <li>Interface utilisateur intuitive et facile à utiliser</li>
-      <li>Gestion efficace des commandes et des stocks</li>
-      <li>Intégration transparente avec les principales plateformes de commerce électronique</li>
-      <li>Mises à jour en temps réel et suivi des commandes</li>
-      <li>Support client exceptionnel et assistance technique</li>
-      <li>Sécurité des données et conformité aux normes de l'industrie</li>
-    </ul>
-</div>
+    <div class="advantages-steps">
+      <div class="advantage-step">
+        <img src="https://swiftabrid.ma/assets/images/services/platform.png" alt="Interface utilisateur intuitive et facile à utiliser" />
+        <h3>Interface utilisateur intuitive et facile à utiliser</h3>
+      </div>
+      <div class="advantage-step">
+        <img src="https://swiftabrid.ma/assets/images/services/stock.png" alt="Gestion efficace des commandes et des stocks" />
+        <h3>Gestion efficace des commandes et des stocks</h3>
+      </div>
+      <div class="advantage-step">
+        <img src="https://swiftabrid.ma/assets/images/services/clients.png" alt="Intégration transparente avec les principales plateformes de commerce électronique" />
+        <h3>Intégration transparente avec les principales plateformes de commerce électronique</h3>
+      </div>
+      <div class="advantage-step">
+        <img src="https://swiftabrid.ma/assets/images/services/tracking.png" alt="Mises à jour en temps réel et suivi des commandes" />
+        <h3>Mises à jour en temps réel et suivi des commandes</h3>
+      </div>
+      <div class="advantage-step">
+        <img src="https://cdn-icons-png.flaticon.com/512/4961/4961759.png" alt="Support client exceptionnel et assistance techniquek" />
+        <h3>Support client exceptionnel et assistance technique</h3>
+      </div>
+      <div class="advantage-step">
+        <img src="https://cdn-icons-png.flaticon.com/512/1691/1691940.png" alt="Sécurité des données et conformité aux normes de l'industrie" />
+        <h3>Sécurité des données et conformité aux normes de l'industrie</h3>
+      </div>
+    </div>
+  </section>
+  
+  
+</main>
+
 <app-footer></app-footer>
