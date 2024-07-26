@@ -6,6 +6,7 @@ import { DashboardBean } from '../models/DashboardBean';
 import { ConfirmationDashboardStatsBean } from '../models/ConfirmationDashboardStatsBean';
 import { ConfirmedTreatedBean } from '../models/ConfirmedTreatedBean';
 import { DeliveryBoyDashStatsBean } from '../models/DeliveryBoyDashStatsBean';
+import { TruckingStepBean } from '../models/TruckingStepBean';
 
 @Injectable({
   providedIn: 'root'
@@ -89,5 +90,9 @@ export class OrderService {
 
   getDeliveryBoyTreatedUrl(username: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/delivery-boy-treated/${username}`);//
+  }
+
+  getOrderByTruckingCodeUrl(truckingCode: number): Observable<TruckingStepBean> {
+    return this.http.get<TruckingStepBean>(`${this.apiUrl}/trucking-order/${truckingCode}`);
   }
 }

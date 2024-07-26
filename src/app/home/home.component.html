@@ -5,9 +5,26 @@
   <section class="tracking-container">
     <h2>Suivez votre commande</h2>
     <form (ngSubmit)="submitTrackingCode()">
-      <input type="number" name="trackingCode" placeholder="Entrez votre code de suivi" required>
+      <input type="number" name="trackingCode" [(ngModel)]="trackingCode" placeholder="Entrez votre code de suivi" required>
       <button type="submit">Suivre</button>
     </form>
+    <div *ngIf="truckingStepBean" class="tracking-card">
+      <h3>Suivez votre commande</h3>
+      <div class="tracking-info">
+        <div class="tracking-detail">
+          <span class="label">Stage:</span>
+          <span class="value">{{ truckingStepBean.stage }}</span>
+        </div>
+        <div class="tracking-detail">
+          <span class="label">Status:</span>
+          <span class="value">{{ truckingStepBean.status }}</span>
+        </div>
+        <div class="tracking-detail">
+          <span class="label">Date:</span>
+          <span class="value">{{ truckingStepBean.dateStep | date: 'yyyy-MM-dd HH:mm:ss' }}</span>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="about-us-container">

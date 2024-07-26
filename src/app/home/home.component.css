@@ -210,6 +210,36 @@ button:hover {
   color: #333;
 }
 
+.tracking-card {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.tracking-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.tracking-detail {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.label {
+  font-weight: bold;
+  color: #333;
+}
+
+.value {
+  color: #555;
+}
+
 @media (max-width: 768px) {
   .advantage-step {
     flex: 1 1 calc(50% - 20px);
