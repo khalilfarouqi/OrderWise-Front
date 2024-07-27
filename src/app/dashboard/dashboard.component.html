@@ -542,11 +542,11 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let orderAssignment of OrderAssignments">
-                                    <td>{{orderAssignment.order.trackingCode}}</td>
-                                    <td>{{orderAssignment.assignmentDate | date: 'dd/MM/YY, hh:mm'}}</td>
-                                    <td>{{orderAssignment.order.stage}}</td>
-                                    <td>{{orderAssignment.order.status}}</td>
-                                    <th>{{orderAssignment.order.totalPrice}} DH</th>
+                                    <td>{{orderAssignment.trackingCode}}</td>
+                                    <td>{{orderAssignment.orderDate | date: 'dd/MM/YY, hh:mm'}}</td>
+                                    <td>{{orderAssignment.stage}}</td>
+                                    <td>{{orderAssignment.status}}</td>
+                                    <th>{{orderAssignment.totalPrice}} DH</th>
                                 </tr>
                             </tbody>
                         </table>
