@@ -43,6 +43,7 @@ import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-
 
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './keycloak-init';
+import { StockDialogComponent } from './stock-dialog/stock-dialog.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { initializeKeycloak } from './keycloak-init';
     SettingComponent,
     ProfilComponent,
     ProductPageComponent,
-    ProfileDialogComponent
+    ProfileDialogComponent,
+    StockDialogComponent
   ],
   imports: [
     ReactiveFormsModule,
