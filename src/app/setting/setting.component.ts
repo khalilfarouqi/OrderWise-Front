@@ -155,6 +155,7 @@ export class SettingComponent implements OnInit {
       montant: ['', Validators.required]
     });
     this.configAppForm = this.fb.group({
+      id: [1, Validators.required],
       avgDelivered: ['', Validators.required],
       avgConfirmation: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -326,7 +327,7 @@ export class SettingComponent implements OnInit {
   }
 
   submitConfigAppForm(): void {
-    this.configAppService.putConfigAppForm(this.userInfoForm.value).subscribe({
+    this.configAppService.putConfigAppForm(this.configAppForm.value).subscribe({
       next: (response) => {
         this.showAlert('Update successful', '', 'success');
       },

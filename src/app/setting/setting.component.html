@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputTel">Téléphone</label>
-                                        <input type="text" class="form-control" [(ngModel)]="profile.tel" id="inputTel" placeholder="Téléphone" formControlName="tel">
+                                        <input type="text" class="form-control" getConfigApp id="inputTel" placeholder="Téléphone" formControlName="tel">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Sauvegarder les modifications</button>                             
                                 </form>
@@ -180,51 +180,51 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="avgDelivered">Average Delivered</label>
-                                                <input type="text" class="form-control" id="avgDelivered" name="avgDelivered" formControlName="avgDelivered">
+                                                <input type="text" class="form-control" id="avgDelivered" name="avgDelivered" formControlName="avgDelivered" [(ngModel)]="configApp.avgDelivered">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="avgConfirmation">Average Confirmation</label>
-                                                <input type="text" class="form-control" id="avgConfirmation" name="avgConfirmation" formControlName="avgDelivered">
+                                                <input type="text" class="form-control" id="avgConfirmation" name="avgConfirmation" formControlName="avgConfirmation" [(ngModel)]="configApp.avgConfirmation">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" formControlName="email" required>
+                                        <input type="email" class="form-control" id="email" name="email" formControlName="email" [(ngModel)]="configApp.email" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="tel">Telephone</label>
-                                        <input type="tel" class="form-control" id="tel" name="tel" formControlName="tel" required>
+                                        <input type="tel" class="form-control" id="tel" name="tel" formControlName="tel" [(ngModel)]="configApp.tel" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                                        <input type="text" class="form-control" id="address" name="address" formControlName="address" required>
+                                        <input type="text" class="form-control" id="address" name="address" formControlName="address" [(ngModel)]="configApp.address" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="facebookUrl">Facebook URL</label>
-                                        <input type="url" class="form-control" id="facebookUrl" name="facebookUrl" formControlName="facebookUrl">
+                                        <input type="url" class="form-control" id="facebookUrl" name="facebookUrl" formControlName="facebookUrl" [(ngModel)]="configApp.facebookUrl">
                                     </div>
                                     <div class="form-group">
                                         <label for="instagramUrl">Instagram URL</label>
-                                        <input type="url" class="form-control" id="instagramUrl" name="instagramUrl" formControlName="instagramUrl">
+                                        <input type="url" class="form-control" id="instagramUrl" name="instagramUrl" formControlName="instagramUrl" [(ngModel)]="configApp.instagramUrl">
                                     </div>
                                     <div class="form-group">
                                         <label for="whatsappUrl">WhatsApp URL</label>
-                                        <input type="url" class="form-control" id="whatsappUrl" name="whatsappUrl" formControlName="whatsappUrl">
+                                        <input type="url" class="form-control" id="whatsappUrl" name="whatsappUrl" formControlName="whatsappUrl" [(ngModel)]="configApp.whatsappUrl">
                                     </div>
                                     <div class="form-group">
                                         <label for="twitterUrl">Twitter URL</label>
-                                        <input type="url" class="form-control" id="twitterUrl" name="twitterUrl" formControlName="twitterUrl">
+                                        <input type="url" class="form-control" id="twitterUrl" name="twitterUrl" formControlName="twitterUrl" [(ngModel)]="configApp.twitterUrl">
                                     </div>
                                     <div class="form-group">
                                         <label for="linkedInUrl">LinkedIn URL</label>
-                                        <input type="url" class="form-control" id="linkedInUrl" name="linkedInUrl" formControlName="linkedInUrl">
+                                        <input type="url" class="form-control" id="linkedInUrl" name="linkedInUrl" formControlName="linkedInUrl" [(ngModel)]="configApp.linkedInUrl">
                                     </div>
                                     <div class="form-group">
                                         <label for="youtubeUrl">YouTube URL</label>
-                                        <input type="url" class="form-control" id="youtubeUrl" name="youtubeUrl" formControlName="youtubeUrl">
+                                        <input type="url" class="form-control" id="youtubeUrl" name="youtubeUrl" formControlName="youtubeUrl" [(ngModel)]="configApp.youtubeUrl">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                 </form>
