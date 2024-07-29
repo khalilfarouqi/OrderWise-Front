@@ -55,4 +55,8 @@ export class ApiConfigService {
   getUploadFileUrl(): string {
     return `${this.baseUrl}/fileUploads`;
   }
+
+  getConfigAppUrl(): string {
+    return `${this.baseUrl}/config-app`;
+  }
 }
