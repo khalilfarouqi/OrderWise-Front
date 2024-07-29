@@ -133,31 +133,53 @@ export class SettingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProfile(this.username);
-    if (this.role == 'SELLER' || this.role == 'DELIVERY_BOY') 
-      this.getWallatByUsername(this.username);
-    this.userForm = new FormGroup({
-      username: new FormControl('', Validators.required),
-      image: new FormControl('', Validators.required)
+    this.userForm = this.fb.group({
+      username: ['', Validators.required],
+      image: ['', Validators.required]
     });
     this.userInfoForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       cin: ['', Validators.required],
-      city: [this.profile.city || this.defaultCity, Validators.required],
-      email: ['', Validators.required],
+      city: [this.defaultCity, Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       tel: ['', Validators.required],
-      gender: [this.profile.gender || this.defaultGender, Validators.required]
+      gender: [this.defaultGender, Validators.required]
     });
     this.passwordForm = this.fb.group({
       oldPassword: ['', [Validators.required]],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmNewPassword: ['', [Validators.required]]
-    }, { validators: this.passwordMatchValidator });
-    this.myMoneyForm = new FormGroup({
-      user: new FormControl('', Validators.required),
-      montant: new FormControl('', Validators.required)
+    }, { validator: this.passwordMatchValidator });
+    this.myMoneyForm = this.fb.group({
+      montant: ['', Validators.required]
     });
+    this.configAppForm = this.fb.group({
+      avgDelivered: ['', Validators.required],
+      avgConfirmation: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      tel: ['', Validators.required],
+      address: ['', Validators.required],
+      facebookUrl: ['', Validators.required],
+      instagramUrl: ['', Validators.required],
+      whatsappUrl: ['', Validators.required],
+      twitterUrl: ['', Validators.required],
+      linkedInUrl: ['', Validators.required],
+      youtubeUrl: ['', Validators.required]
+    });
+
+    this.authService.isLoggedIn().then(loggedIn => {
+      if (loggedIn) {
+        this.username = this.authService.getUsername();
+        this.role = this.authService.getUserRole();
+        this.getProfile(this.username);
+        if (this.role == 'SELLER' || this.role == 'DELIVERY_BOY') 
+          this.getWallatByUsername(this.username);
+      } else {
+        this.authService.login();
+      }
+    });
+
     this.initializeEnum();
     this.getConfigApp();
   }
