@@ -87,8 +87,8 @@
                                 <form [formGroup]="userInfoForm" (ngSubmit)="submitUserInfoForm()">
                                     <div class="form-group">
                                         <label for="inputGender">Genre</label>
-                                        <select id="inputGender" class="form-control" formControlName="gender">
-                                            <option value="">{{profile.gender}}</option>
+                                        <select id="inputGender" class="form-control" formControlName="gender" >
+                                            <option selected>{{profile.gender}}</option>
                                             <option *ngFor="let gender of genderEntries" [value]="gender.key">{{ gender.value }}</option>
                                         </select>
                                     </div>
@@ -110,7 +110,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="inputCity">Ville</label>
                                             <select id="inputCity" class="form-control" formControlName="city">
-                                                <option value="">{{profile.city}}</option>
+                                                <option selected>{{profile.city}}</option>
                                                 <option *ngFor="let city of cityEntries" [value]="city.key">{{ city.value }}</option>
                                             </select>
                                         </div>

@@ -69,8 +69,8 @@ export class SettingComponent implements OnInit {
     cin: '',
     tel: '',
     image: '',
-    city: City.AGOURI_MEKNES,
-    gender: Gender.MALE,
+    city: City.NON_RESIDENT,
+    gender: Gender.PERSONALIZE,
     role: Role.ADMIN,
     userType: UserType.ADMIN
   };
@@ -81,6 +81,9 @@ export class SettingComponent implements OnInit {
 
   role!: string;
   username!: string;
+
+  defaultGender: Gender = Gender.PERSONALIZE;
+  defaultCity: City = City.NON_RESIDENT;
 
   initializeEnum() {
     this.cityEntries = Object.entries(City).map(([key, value]) => ({ key, value }));
@@ -131,19 +134,20 @@ export class SettingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProfile(this.username);
-    this.getWallatByUsername(this.username);
+    if (this.role == 'SELLER' || this.role == 'DELIVERY_BOY') 
+      this.getWallatByUsername(this.username);
     this.userForm = new FormGroup({
       username: new FormControl('', Validators.required),
       image: new FormControl('', Validators.required)
     });
-    this.userInfoForm = new FormGroup({
-      firstname: new FormControl('', Validators.required),
-      lastname: new FormControl('', Validators.required),
-      cin: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      tel: new FormControl('', Validators.required),
-      gender: new FormControl('', Validators.required)
+    this.userInfoForm = this.fb.group({
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      cin: ['', Validators.required],
+      city: [this.profile.city || this.defaultCity, Validators.required],
+      email: ['', Validators.required],
+      tel: ['', Validators.required],
+      gender: [this.profile.gender || this.defaultGender, Validators.required]
     });
     this.passwordForm = this.fb.group({
       oldPassword: ['', [Validators.required]],
@@ -172,6 +176,8 @@ export class SettingComponent implements OnInit {
     this.userService.getProfile(username).subscribe(
       (data) => {
         this.profile = data;
+        this.profile.gender = this.profile.gender || this.defaultGender;
+        this.profile.city = this.profile.city || this.defaultCity;
         this.previewUrl = 'assets/' + this.profile.image;
       },
       (error) => {
