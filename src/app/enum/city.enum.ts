@@ -1,5 +1,5 @@
 export enum City {
-
+    NON_RESIDENT = 'Non resident',
     AGOURI_MEKNES = 'Agouri Meknes',
     AINBIDA_FES = 'Ain Bida Fes',
     AINCHKEF_FES = 'Ain Chkef Fes',
