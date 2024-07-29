@@ -14,6 +14,9 @@ import Swal from 'sweetalert2';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { UploadFileService } from '../service/upload-file.service';
 import { AuthService } from '../service/auth.service';
+import { ContactUsService } from '../service/contact-us.service';
+import { ConfigAppService } from '../service/config-app.service';
+import { ConfigApp } from '../models/configApp';
 
 @Component({
   selector: 'app-setting',
@@ -26,6 +29,7 @@ export class SettingComponent implements OnInit {
   userInfoForm!: FormGroup;
   passwordForm!: FormGroup;
   myMoneyForm!: FormGroup;
+  configAppForm!: FormGroup;
 
   profileImage: string | undefined;
   selectedFile: File | null = null;
@@ -37,6 +41,22 @@ export class SettingComponent implements OnInit {
   selectedImage!: string;
   
   wallet: Wallet;
+  
+  configApp: ConfigApp = {
+    id: 0,
+    email: '',
+    tel: '',
+    address: '',
+    facebookUrl: '',
+    instagramUrl: '',
+    whatsappUrl: '',
+    twitterUrl: '',
+    linkedInUrl: '',
+    youtubeUrl: '',
+
+    avgDelivered: '',
+    avgConfirmation: ''
+  };
 
   profile: User = {
     username: '',
@@ -73,7 +93,8 @@ export class SettingComponent implements OnInit {
     private walletService: WalletService,
     private myMoneyService: MyMoneyService,
     private uploadFileService: UploadFileService,
-    private authService: AuthService) { 
+    private authService: AuthService,
+    private configAppService: ConfigAppService) { 
       const defaultUser: User = {
         id: 0, 
         username: '', 
@@ -134,6 +155,7 @@ export class SettingComponent implements OnInit {
       montant: new FormControl('', Validators.required)
     });
     this.initializeEnum();
+    this.getConfigApp();
   }
 
   onSidebarToggled(isOpen: boolean) {
@@ -262,6 +284,28 @@ export class SettingComponent implements OnInit {
         console.error('Error fetching wallet : ', error);
       }
     );
+  }
+
+  getConfigApp() {
+    this.configAppService.getConfigAppUrl().subscribe(
+      (data) => {
+        this.configApp = data;
+      },
+      (error) => {
+        console.error('Error fetching config app : ', error);
+      }
+    );
+  }
+
+  submitConfigAppForm(): void {
+    this.configAppService.putConfigAppForm(this.userInfoForm.value).subscribe({
+      next: (response) => {
+        this.showAlert('Update successful', '', 'success');
+      },
+      error: (error) => {
+        console.error('Error  ==>  ', error);
+      }
+    });
   }
 
   showAlert(title: string, text: string, icon: any) {
