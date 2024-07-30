@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiConfigService } from './api-config-service.service';
 import { Observable } from 'rxjs';
@@ -59,5 +59,10 @@ export class UserService {
 
   valideUrl(userForm: User): Observable<any> {
     return this.http.put(this.apiUrl + '/valide', userForm);
+  }
+
+  deleteAccountUrl(username: string, password: string): Observable<string> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`${this.apiUrl}/delete-account/${username}/${password}`, {}, { headers, responseType: 'text' });
   }
 }

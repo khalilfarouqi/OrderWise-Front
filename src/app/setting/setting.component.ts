@@ -37,6 +37,8 @@ export class SettingComponent implements OnInit {
   error: string | undefined;
 
   selectedImage!: string;
+
+  password!: string;
   
   wallet: Wallet;
   
@@ -331,6 +333,36 @@ export class SettingComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error  ==>  ', error);
+      }
+    });
+  }
+
+  onSubmit(): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Do you really want to delete your account? This action cannot be undone.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deleteAccount();
+      }
+    });
+  }
+
+  deleteAccount(): void {
+    this.userService.deleteAccountUrl(this.authService.getUsername(), this.password).subscribe({
+      next: (response: any) => {
+        Swal.fire('Deleted!', 'Your account has been deleted.', 'success').then(() => {
+          this.authService.logout();
+        });
+      },
+      error: (error) => {
+        Swal.fire('Error!', 'There was an error deleting your account.', 'error');
+        console.error('Error deleting account', error);
       }
     });
   }

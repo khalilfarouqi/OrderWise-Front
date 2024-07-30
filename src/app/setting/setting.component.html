@@ -138,16 +138,16 @@
                                 <form [formGroup]="passwordForm" (ngSubmit)="submitPasswordForm()">
                                     <div class="form-group">
                                         <label for="inputPasswordCurrent">Current password</label>
-                                        <input type="password" class="form-control" id="inputPasswordCurrent" formControlName="oldPassword">
+                                        <input type="password" class="form-control" id="inputPasswordCurrent" formControlName="oldPassword" placeholder="Current password">
                                         <small><a href="#">Forgot your password?</a></small>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPasswordNew">New password</label>
-                                        <input type="password" class="form-control" id="newPassword" formControlName="newPassword" placeholder="newPassword">
+                                        <input type="password" class="form-control" id="newPassword" formControlName="newPassword" placeholder="new Password">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPasswordNew2">Verify password</label>
-                                        <input type="password" class="form-control" id="confirmNewPassword" formControlName="confirmNewPassword" placeholder="confirmNewPassword">
+                                        <input type="password" class="form-control" id="confirmNewPassword" formControlName="confirmNewPassword" placeholder="confirm New Password">
                                     </div>
                                     <div *ngIf="passwordForm.hasError('mismatch') && passwordForm.get('confirmNewPassword')?.touched" class="text-danger">
                                         Passwords do not match.
@@ -371,10 +371,10 @@
                             </div>
                             <div class="card-body">
                                 <p>Warning: Deleting your account is permanent and cannot be undone.</p>
-                                <form>
+                                <form (ngSubmit)="onSubmit()">
                                     <div class="form-group">
                                         <label for="deletePassword">Enter your password to confirm:</label>
-                                        <input type="password" class="form-control" id="deletePassword">
+                                        <input type="password" class="form-control" id="deletePassword" [(ngModel)]="password" name="password" placeholder="Your password" required>
                                     </div>
                                     <button type="submit" class="btn btn-danger">Delete my account</button>
                                 </form>
