@@ -1,0 +1,56 @@
+<div mat-dialog-content>
+    <form>
+        <!-- Stock Details -->
+        <h2>Stock Details</h2>
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" class="form-control" id="quantity" [(ngModel)]="productInStock.quantity" name="quantity">
+        </div>
+        <div class="form-group">
+          <label for="additionDate">Addition Date</label>
+          <input type="date" class="form-control" id="additionDate" [(ngModel)]="productInStock.additionDate" name="additionDate" disabled>
+        </div>
+        <div class="form-group">
+          <label for="lastSaleDate">Last Sale Date</label>
+          <input type="date" class="form-control" id="lastSaleDate" [(ngModel)]="productInStock.lastSaleDate" name="lastSaleDate" disabled>
+        </div>
+        <div class="form-group">
+          <label for="lastModifiedDate">Last Modified Date</label>
+          <input type="date" class="form-control" id="lastModifiedDate" [(ngModel)]="productInStock.lastModifiedDate" name="lastModifiedDate" disabled>
+        </div>
+    
+        <!-- Product Details -->
+        <h2>Product Details</h2>
+        <div class="form-group">
+          <label for="productNom">Product Name</label>
+          <input type="text" class="form-control" id="productNom" [(ngModel)]="productInStock.product.productNom" name="productNom">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="description" [(ngModel)]="productInStock.product.description" name="description">
+        </div>
+        <div class="form-group">
+          <label for="purchasePrice">Purchase Price</label>
+          <input type="number" class="form-control" id="purchasePrice" [(ngModel)]="productInStock.product.purchasePrice" name="purchasePrice">
+        </div>
+        <div class="form-group">
+          <label for="sellingPrice">Selling Price</label>
+          <input type="number" class="form-control" id="sellingPrice" [(ngModel)]="productInStock.product.sellingPrice" name="sellingPrice">
+        </div>
+        <div class="form-group">
+          <label for="weight">Weight</label>
+          <input type="number" class="form-control" id="weight" [(ngModel)]="productInStock.product.weight" name="weight">
+        </div>
+
+        <!-- Seller Details -->
+        <h2>Seller Details</h2>
+        <div class="form-group">
+          <label for="seller">Seller</label>
+          <input type="text" class="form-control" id="seller" [(ngModel)]="productInStock.product.seller.fullName" name="seller" disabled>
+        </div>
+      </form>
+</div>
+<div mat-dialog-actions>
+  <button type="button" class="btn btn-warning" (click)="onCancel()">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="onSave()" style="margin: 10px;">Save</button>
+</div>
