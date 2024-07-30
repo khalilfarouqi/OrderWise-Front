@@ -13,7 +13,7 @@
             <th scope="col">Addition date</th>
             <th scope="col">Last modified date</th>
             <th scope="col">Last sale date</th>
-            <th scope="col">Modifier</th>
+            <th scope="col">Edit</th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
             <td>{{stock.lastModifiedDate | date: 'dd/MM/YY, hh:mm'}}</td>
             <td>{{stock.lastSaleDate | date: 'dd/MM/YY, hh:mm'}}</td>
             <td>
-              <input type="button" id="modif" value="Modifier">
+              <button type="submit" id="modif" (click)="openModal(stock)"><i class="fas fa-pen"></i></button>
             </td>
           </tr>
         </tbody>

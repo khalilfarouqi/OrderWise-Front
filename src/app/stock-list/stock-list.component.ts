@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { StockService } from '../service/stock.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
+import { StockDialogComponent } from '../stock-dialog/stock-dialog.component';
 
 @Component({
   selector: 'app-stock-list',
@@ -16,7 +19,8 @@ export class StockListComponent implements OnInit {
   username!: string;
 
   constructor(private stockService: StockService, 
-    private router: Router,
+    private router: Router, 
+    private dialog: MatDialog,
     private authService: AuthService) {
       this.authService.isLoggedIn().then(loggedIn => {
         if (loggedIn) {
@@ -26,7 +30,20 @@ export class StockListComponent implements OnInit {
           this.authService.login();
         }
       });
-    }
+  }
+
+  openModal(productInStock: any): void {
+    const dialogRef = this.dialog.open(StockDialogComponent, {
+      width: '600px',
+      data: { productInStock }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.updateStock(result);
+      }
+    });
+  }
 
   onSidebarToggled(isOpen: boolean) {
     this.isSidebarOpen = isOpen;
@@ -37,6 +54,17 @@ export class StockListComponent implements OnInit {
       this.getStocksByUsernameUrl(this.username);
     else if(this.role == 'ADMIN')
       this.getAllStocks();
+  }
+  
+  updateStock(productInStock: any): void {
+    this.stockService.putStockForm(productInStock.value).subscribe({
+      next: (response) => {
+        this.showAlert('Update successful', '', 'success');
+      },
+      error: (error) => {
+        console.error('Error  ==>  ', error);
+      }
+    });
   }
 
   getStocksByUsernameUrl(username: string) {
@@ -63,6 +91,15 @@ export class StockListComponent implements OnInit {
 
   viewProductDetails(productId: number): void {
     this.router.navigate(['/product-page', productId]);
+  }
+
+  showAlert(title: string, text: string, icon: any) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      confirmButtonText: 'OK'
+    });
   }
 
 }
