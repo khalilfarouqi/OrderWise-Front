@@ -1,13 +1,14 @@
 import { Photo } from "./Photo";
 import { User } from "./User";
 
-export interface product {
+export interface Product {
     id?: Number;
     productNom?: string;
+    description?: string;
     purchasePrice?: number;
     sellingPrice?: number;
-    weight: number;
+    weight?: number;
 
-    seller?: User;
+    seller: User;
     photo?: Photo;
 }

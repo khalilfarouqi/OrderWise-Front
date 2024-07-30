@@ -8,7 +8,8 @@ export interface User {
     lastCheckIn?: string;
     firstname?: string;
     lastname?: string;
-    username: string;
+    username?: string;
+    fullName?: string;
     email?: string;
     password?: string;
     cin?: string;
