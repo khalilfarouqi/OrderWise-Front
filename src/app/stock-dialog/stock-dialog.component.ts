@@ -16,7 +16,6 @@ export class StockDialogComponent {
     }
 
   onSave(): void {
-    console.log('this.productInStock ==> ' + this.productInStock)
     this.dialogRef.close(this.productInStock);
   }
 
