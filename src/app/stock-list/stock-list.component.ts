@@ -57,12 +57,13 @@ export class StockListComponent implements OnInit {
   }
   
   updateStock(productInStock: any): void {
-    this.stockService.putStockForm(productInStock.value).subscribe({
+    this.stockService.putStockForm(productInStock).subscribe({
       next: (response) => {
         this.showAlert('Update successful', '', 'success');
+        this.ngOnInit();
       },
       error: (error) => {
-        console.error('Error  ==>  ', error);
+        this.showAlert('Update no successful', '', 'error');
       }
     });
   }
