@@ -11,10 +11,8 @@ import { Wallet } from '../models/Wallet';
 import { MyMoneyService } from '../service/my-money.service';
 import { MyMoney } from '../models/MyMoney';
 import Swal from 'sweetalert2';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { UploadFileService } from '../service/upload-file.service';
 import { AuthService } from '../service/auth.service';
-import { ContactUsService } from '../service/contact-us.service';
 import { ConfigAppService } from '../service/config-app.service';
 import { ConfigApp } from '../models/configApp';
 
