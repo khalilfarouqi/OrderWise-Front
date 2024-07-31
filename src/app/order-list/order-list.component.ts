@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../service/order.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-list',
@@ -89,6 +90,26 @@ export class OrderListComponent implements OnInit {
 
   viewProductDetails(productId: number): void {
     this.router.navigate(['/product-page', productId]);
+  }
+
+  treatOrder(id: number, status: string) {
+    this.orderService.treatOrderUrl(id, status, this.authService.getUsername()).subscribe({
+      next: (response: any) => {
+        this.showAlert(status + ' successful', '', 'success');
+        this.ngOnInit();
+      }, error: (error) => {
+        this.showAlert(status + ' error', 'Contact support', 'error');
+      }
+    });
+  }
+
+  showAlert(title: string, text: string, icon: any) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      confirmButtonText: 'OK'
+    });
   }
 
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiConfigService } from './api-config-service.service';
 import { Observable } from 'rxjs';
@@ -94,5 +94,10 @@ export class OrderService {
 
   getOrderByTruckingCodeUrl(truckingCode: number): Observable<TruckingStepBean> {
     return this.http.get<TruckingStepBean>(`${this.apiUrl}/trucking-order/${truckingCode}`);
+  }
+
+  treatOrderUrl(id: number, status: string, treatBy: string): Observable<string> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`${this.apiUrl}/treat-order/${id}/${status}/${treatBy}`, {}, { headers, responseType: 'text' });
   }
 }
