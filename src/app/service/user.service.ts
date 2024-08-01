@@ -65,4 +65,9 @@ export class UserService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`${this.apiUrl}/delete-account/${username}/${password}`, {}, { headers, responseType: 'text' });
   }
+
+  treatNewProfiles(user: User, response: string): Observable<string> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(`${this.apiUrl}/treat-new-user/${response}`, user, { headers, responseType: 'text' });
+  }
 }
