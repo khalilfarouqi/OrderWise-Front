@@ -15,6 +15,9 @@ export interface User {
     cin?: string;
     tel?: string;
     image?: string;
+    
+    userId?: string;
+    confirmedBy?: string;
 
     city?: City;
     gender?: Gender;
