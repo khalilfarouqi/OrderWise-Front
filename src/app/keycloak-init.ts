@@ -19,7 +19,6 @@ export function initializeKeycloak(keycloak: KeycloakService) {
               console.error('Keycloak initialization error:', error);
           });
       }
-      console.log("Running outside browser environment");
       return Promise.resolve();
   };
 }
