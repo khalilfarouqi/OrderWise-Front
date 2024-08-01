@@ -4,7 +4,6 @@ import { User } from '../models/User';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
 import Swal from 'sweetalert2';
-import { UserType } from '../enum/userType.enum';
 
 @Component({
   selector: 'app-profil',
@@ -43,16 +42,10 @@ export class ProfilComponent implements OnInit {
       width: '600px',
       data: { profile }
     });
-
+    
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        if (result.userType == UserType.SELLER) {
-          this.valide(result);
-        } else if (result.userType == UserType.REFUSER) {
-          this.refuse(result);
-        }
-      }
     });
+    this.ngOnInit();
   }
 
   updateProfile(updatedProfile: User) {
@@ -98,11 +91,9 @@ export class ProfilComponent implements OnInit {
       // Here, you can call a service method to save the updated profile to the backend if needed
       this.userService.valideUrl(updatedProfile).subscribe(
         response => {
-          console.log('Profile is valide successfully', response);
           this.showAlert('Profile is valide successfully', response, 'success');
         },
         error => {
-          console.error('Error in valide profile', error);
           this.showAlert('Error in valide profile', error.error.message, 'error');
         }
       );
