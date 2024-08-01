@@ -38,7 +38,7 @@
       </a>
       <span class="tooltip">Stock</span>
     </li>
-    <li *ngIf="role == 'SELLER'" (click)="onButtonClick('Notification', '/notification', $event)">
+    <li *ngIf="role != 'NEW_USER'" (click)="onButtonClick('Notification', '/notification', $event)">
       <a href="notification">
         <i class='bx bx-bell' ></i>
         <span class="links_name">Notification</span>
