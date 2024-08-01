@@ -93,7 +93,7 @@ export class OrderListComponent implements OnInit {
   }
 
   treatOrder(id: number, status: string) {
-    this.orderService.treatOrderUrl(id, status, this.authService.getUsername()).subscribe({
+    this.orderService.treatOrderUrl(id, status, this.authService.getFullname()).subscribe({
       next: (response: any) => {
         this.showAlert(status + ' successful', '', 'success');
         this.ngOnInit();
