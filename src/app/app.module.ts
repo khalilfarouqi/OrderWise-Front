@@ -44,6 +44,8 @@ import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './keycloak-init';
 import { StockDialogComponent } from './stock-dialog/stock-dialog.component';
+import { SendNotificationComponent } from './send-notification/send-notification.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,8 @@ import { StockDialogComponent } from './stock-dialog/stock-dialog.component';
     ProfilComponent,
     ProductPageComponent,
     ProfileDialogComponent,
-    StockDialogComponent
+    StockDialogComponent,
+    SendNotificationComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -91,7 +94,8 @@ import { StockDialogComponent } from './stock-dialog/stock-dialog.component';
     MatPaginatorModule,
     MatIconModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    QuillModule.forRoot()
   ],
   providers: [
     provideClientHydration(),
