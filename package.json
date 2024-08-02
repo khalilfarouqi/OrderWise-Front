@@ -33,6 +33,8 @@
     "keycloak-js": "^25.0.1",
     "ngx-bootstrap": "^12.0.0",
     "ngx-pagination": "^6.0.3",
+    "ngx-quill": "^26.0.5",
+    "quill": "^2.0.2",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.11.1",
     "swiper": "^11.1.4",
