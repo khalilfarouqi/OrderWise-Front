@@ -1,0 +1,8 @@
+.main-content {
+    margin-left: 78px;
+    transition: margin-left 0.5s;
+    padding: 16px;
+} 
+.main-content-open {
+    margin-left: 250px;
+}

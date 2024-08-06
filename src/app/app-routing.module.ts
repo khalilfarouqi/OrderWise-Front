@@ -17,6 +17,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
+import { SendNotificationComponent } from './send-notification/send-notification.component';
 
 const routes: Routes = [
   //{ path: '', component: AppComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: "tarif", component: TarifPageComponent},
   { path: "service", component: ServicePageComponent},
   { path: "contact", component: ContactUsPageComponent},
+  { path: "send-notification", component: SendNotificationComponent, canActivate: [AuthGuard]},
   { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard] },
   { path: "notification", component: NotificationListComponent, canActivate: [AuthGuard]},
   { path: "order", component: OrderListComponent, canActivate: [AuthGuard]},

@@ -46,6 +46,7 @@ import { initializeKeycloak } from './keycloak-init';
 import { StockDialogComponent } from './stock-dialog/stock-dialog.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { QuillModule } from 'ngx-quill';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,10 @@ import { QuillModule } from 'ngx-quill';
     MatIconModule,
     MatIconModule,
     MatFormFieldModule,
+    MatDialogModule,
+    MatIconModule,
+    MatSelectModule,
+    MatDialogModule,
     QuillModule.forRoot()
   ],
   providers: [
