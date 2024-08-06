@@ -59,4 +59,16 @@ export class ApiConfigService {
   getConfigAppUrl(): string {
     return `${this.baseUrl}/config-app`;
   }
+
+  getCustomerUrl(): string {
+    return `${this.baseUrl}/customer`;
+  }
+
+  getMailUrl(): string {
+    return `${this.baseUrl}/mail`;
+  }
+
+  getSmsUrl(): string {
+    return `${this.baseUrl}/sms`;
+  }
 }
