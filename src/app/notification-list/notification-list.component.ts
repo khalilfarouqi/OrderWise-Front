@@ -47,7 +47,6 @@ export class NotificationListComponent implements OnInit {
       },
       error => {
         this.showAlert('Error marking notification as read', error, 'error');
-        console.error('Error  ==>  ', error);
       }
     );
   }
