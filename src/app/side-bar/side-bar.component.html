@@ -45,7 +45,7 @@
       </a>
       <span class="tooltip">Notification</span>
     </li>
-    <li (click)="onButtonClick('Send notification', '/send-notification', $event)">
+    <li *ngIf="role == 'CONFIRMED' || role == 'ADMIN' || role == 'DELIVERY_BOY'" (click)="onButtonClick('Send notification', '/send-notification', $event)">
       <a href="send-notification">
         <i class='bx bx-send' ></i>
         <span class="links_name">Send notification</span>
