@@ -15,7 +15,6 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import { SettingComponent } from './setting/setting.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ProductPageComponent } from './product-page/product-page.component';
-import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { TeamMemberComponent } from './team-member/team-member.component';
