@@ -71,4 +71,8 @@ export class ApiConfigService {
   getSmsUrl(): string {
     return `${this.baseUrl}/sms`;
   }
+
+  getTeamMembersUrl(): string {
+    return `${this.baseUrl}/team-members`;
+  }
 }
