@@ -2,7 +2,7 @@ import { UserType } from "../enum/userType.enum";
 import { User } from "./User";
 
 export interface TeamMembers {
-    id?: Number;
+    id?: number;
     fullName?: string;
     userType?: UserType;
     currentLoad?: number;
