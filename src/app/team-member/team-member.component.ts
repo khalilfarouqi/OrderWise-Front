@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { TeamMemberProfilComponent } from '../team-member-profil/team-member-profil.component';
 import { TeamMembers } from '../models/TeamMembers';
 import { MatDialog } from '@angular/material/dialog';
+import { UserType } from '../enum/userType.enum';
 
 @Component({
   selector: 'app-team-member',
@@ -63,17 +64,11 @@ export class TeamMemberComponent implements OnInit {
   }
 
   // Method to ban a team member
-  banMember(memberId: number): void {
+  banMember(form: any): void {
     const confirmed = confirm('Are you sure you want to ban this member?');
     if (confirmed) {
-      this.teamMemberService.banMember(memberId).subscribe({
-        next: () => {
-          this.showAlert('Member has been banned.', '', 'success');
-        },
-        error: (error) => {
-          console.error('Error banning member:', error);
-        }
-      });
+      form.user.userType = UserType.HOLD;
+      this.updateMember(form);
     }
   }
 
