@@ -45,6 +45,13 @@
       </a>
       <span class="tooltip">Notification</span>
     </li>
+    <li *ngIf="role == 'ADMIN'" (click)="onButtonClick('Team Members', '/members', $event)">
+      <a href="members">
+        <i class='bx bx-group' ></i>
+        <span class="links_name">Team Members</span>
+      </a>
+      <span class="tooltip">Team Members</span>
+    </li>
     <li *ngIf="role == 'CONFIRMED' || role == 'ADMIN' || role == 'DELIVERY_BOY'" (click)="onButtonClick('Send notification', '/send-notification', $event)">
       <a href="send-notification">
         <i class='bx bx-send' ></i>
