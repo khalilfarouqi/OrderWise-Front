@@ -39,8 +39,8 @@ const routes: Routes = [
   { path: "setting", component: SettingComponent, canActivate: [AuthGuard]},
   { path: "profil", component: ProfilComponent, canActivate: [AuthGuard]},
   { path: "product-page/:id", component: ProductPageComponent, canActivate: [AuthGuard]},
-  { path: "members", component: TeamMemberComponent},
-  { path: "members/:id", component: TeamMemberProfilComponent},
+  { path: "members", component: TeamMemberComponent, canActivate: [AuthGuard]},
+  { path: "members/:id", component: TeamMemberProfilComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: 'home' }
 ];
 
