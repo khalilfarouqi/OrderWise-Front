@@ -1,0 +1,40 @@
+.btn{
+    margin: 10px;
+}
+.btn-warning{
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+/* Center the form group and image */
+.text-center {
+    text-align: center;
+  }
+  
+  /* Style for the current image to make it circular and similar to the uploaded example */
+  img.rounded-circle {
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    max-width: 150px;
+  }
+  
+  /* Optional: Add some margin around the image */
+  img.img-thumbnail {
+    margin-bottom: 15px;
+  }

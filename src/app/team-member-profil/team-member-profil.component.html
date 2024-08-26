@@ -1,0 +1,59 @@
+<h1 mat-dialog-title>{{ isEditMode ? 'Edit Member' : 'Add New Member' }}</h1>
+<div mat-dialog-content>
+  <form #addMemberForm="ngForm" (ngSubmit)="onSave()">
+    <div class="form-group text-center">
+      <label for="currentImage">Current Image</label>
+      <div class="mb-3">
+        <img [src]="teamMember.user.image || 'https://cdn-icons-png.flaticon.com/512/10412/10412383.png'" alt="Current Image" class="rounded-circle img-thumbnail" id="currentImage" style="max-width: 150px;">
+      </div>
+      <label for="image">Upload New Image</label><br>
+      <input type="file" class="file-upload" (change)="onImageSelected($event)">
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" [(ngModel)]="teamMember.user.username" name="username" [disabled]="isEditMode">
+    </div>
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" id="firstname" [(ngModel)]="teamMember.user.firstname" name="firstname" required>
+    </div>
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input type="text" class="form-control" id="lastname" [(ngModel)]="teamMember.user.lastname" name="lastname" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="teamMember.user.email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label for="cin">Numero d’identité</label>
+      <input type="text" class="form-control" id="cin" [(ngModel)]="teamMember.user.cin" name="cin">
+    </div>
+    <div class="form-group">
+      <label for="tel">Telephone</label>
+      <input type="text" class="form-control" id="tel" [(ngModel)]="teamMember.user.tel" name="tel">
+    </div>
+    <div class="form-group">
+      <label for="city">Ville</label>
+      <select class="form-control" id="city" [(ngModel)]="teamMember.user.city" name="city">
+        <option *ngFor="let city of cities" [value]="city.key">{{ city.value }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="gender">Genre</label>
+      <select class="form-control" id="gender" [(ngModel)]="teamMember.user.gender" name="gender">
+        <option *ngFor="let gender of genders" [value]="gender.key">{{ gender.value }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="userType">Role</label>
+      <select class="form-control" id="userType" [(ngModel)]="teamMember.user.userType" name="userType">
+        <option *ngFor="let userType of userTypes" [value]="userType.key">{{ userType.value }}</option>
+      </select>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button type="button" class="btn btn-warning" mat-dialog-close>Cancel</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!addMemberForm.valid" (click)="onSave()">Save</button>
+</div>
