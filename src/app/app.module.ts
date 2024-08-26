@@ -47,6 +47,8 @@ import { StockDialogComponent } from './stock-dialog/stock-dialog.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { QuillModule } from 'ngx-quill';
 import { MatSelectModule } from '@angular/material/select';
+import { TeamMemberComponent } from './team-member/team-member.component';
+import { TeamMemberProfilComponent } from './team-member-profil/team-member-profil.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import { MatSelectModule } from '@angular/material/select';
     ProductPageComponent,
     ProfileDialogComponent,
     StockDialogComponent,
-    SendNotificationComponent
+    SendNotificationComponent,
+    TeamMemberComponent,
+    TeamMemberProfilComponent
   ],
   imports: [
     ReactiveFormsModule,

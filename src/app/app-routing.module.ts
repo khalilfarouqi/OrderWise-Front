@@ -18,6 +18,8 @@ import { ProductPageComponent } from './product-page/product-page.component';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
+import { TeamMemberComponent } from './team-member/team-member.component';
+import { TeamMemberProfilComponent } from './team-member-profil/team-member-profil.component';
 
 const routes: Routes = [
   //{ path: '', component: AppComponent},
@@ -37,6 +39,8 @@ const routes: Routes = [
   { path: "setting", component: SettingComponent, canActivate: [AuthGuard]},
   { path: "profil", component: ProfilComponent, canActivate: [AuthGuard]},
   { path: "product-page/:id", component: ProductPageComponent, canActivate: [AuthGuard]},
+  { path: "members", component: TeamMemberComponent},
+  { path: "members/:id", component: TeamMemberProfilComponent},
   { path: '**', redirectTo: 'home' }
 ];
 
